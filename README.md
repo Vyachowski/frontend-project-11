@@ -4,4 +4,4 @@
 
 ### Demo
 
-[RSS Reader](https://rss-reader-ldl9kuxd7-vyachowski.vercel.app)
+[RSS Reader](https://rss-reader-xi-five.vercel.app/)
