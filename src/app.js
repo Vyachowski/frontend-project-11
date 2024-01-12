@@ -1,11 +1,8 @@
-import {
-  object, string,
-} from 'yup';
-import {
-  rssFormInputElement, rssFormButtonElement, watchedState,
-} from './watchedState.js';
+import { object, string } from 'yup';
+import { rssFormButtonElement, rssFormInputElement, watchedState } from './watchedState.js';
+import { changeLanguage } from './locales/index.js';
 
-const app = () => {
+const app = (i18next) => {
   // RSS Form component
   const urlSchema = object(
     { url: string().url().required() },
@@ -17,10 +14,12 @@ const app = () => {
       .then((r) => {
         const lastIndex = watchedState.rssUrls.length;
         watchedState.rssUrls[lastIndex] = r.url;
+        watchedState.errors = '';
         watchedState.state = 'filling';
       })
       .catch((err) => {
-        watchedState.errors = err;
+        const errorMessageKey = `rssForm.errorMessages.${err.path}`;
+        watchedState.errors = i18next.t(errorMessageKey);
         watchedState.state = 'error';
       });
   });
@@ -30,6 +29,9 @@ const app = () => {
     watchedState.state = 'sending';
     watchedState.state = 'sent';
   });
+
+  // Change language by default
+  changeLanguage(i18next, 'en');
 };
 
 export default app;

@@ -1,6 +1,16 @@
-// @ts-check
-// import * as bootstrap from 'bootstrap';
+import * as i18n from 'i18next';
+import resources from './locales/index.js';
 import app from './app.js';
 import './styles.scss';
 
-app();
+const runApp = () => {
+  const i18nextInstance = i18n.createInstance();
+  i18nextInstance.init({
+    lng: 'ru',
+    debug: true,
+    resources,
+  }).then(() => app(i18nextInstance))
+    .catch((err) => console.log(err));
+};
+
+runApp();
