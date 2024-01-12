@@ -7,7 +7,9 @@ import {
 
 const app = () => {
   // RSS Form component
-  const urlSchema = object({ url: string().url().nullable() });
+  const urlSchema = object(
+    { url: string().url().required() },
+  );
 
   rssFormInputElement.addEventListener('input', (e) => {
     watchedState.rssForm.url = e.target.value;
