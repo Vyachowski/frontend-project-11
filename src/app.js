@@ -1,47 +1,13 @@
 import {
   object, string,
 } from 'yup';
-import onChange from 'on-change';
+import {
+  rssFormInputElement, rssFormButtonElement, watchedState,
+} from './watchedState.js';
 
 const app = () => {
-  // Rss-form component
+  // RSS Form component
   const urlSchema = object({ url: string().url().nullable() });
-
-  const rssFormElement = document.querySelector('.rss-form');
-  const [rssFormInputElement, rssFormButtonElement] = rssFormElement.elements;
-
-  const state = {
-    rssUrls: [],
-    state: null, // error, filling, sending, sent
-    rssForm: {
-      url: null,
-    },
-    errors: {},
-  };
-
-  const watchedState = onChange(state, (path, value) => {
-    const render = {
-      error: () => {
-        rssFormInputElement.classList.add('is-invalid');
-        rssFormButtonElement.disabled = true;
-
-      },
-      filling: () => {
-        rssFormInputElement.classList.remove('is-invalid');
-        rssFormButtonElement.disabled = false;
-      },
-      sending: () => {
-        rssFormButtonElement.disabled = true;
-      },
-      sent: () => {
-        rssFormInputElement.value = '';
-      },
-    };
-
-    if (path === 'state') {
-      render[value]();
-    }
-  });
 
   rssFormInputElement.addEventListener('input', (e) => {
     watchedState.rssForm.url = e.target.value;
@@ -52,8 +18,8 @@ const app = () => {
         watchedState.state = 'filling';
       })
       .catch((err) => {
-        watchedState.state = 'error';
         watchedState.errors = err;
+        watchedState.state = 'error';
       });
   });
 
