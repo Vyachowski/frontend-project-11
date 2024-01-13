@@ -1,24 +1,22 @@
-import { object, string } from 'yup';
-import { rssFormButtonElement, rssFormInputElement, watchedState } from './watchedState.js';
-import { changeLanguage } from './locales/index.js';
+import axios from 'axios';
+import { rssFormButtonElement, rssFormInputElement, watchedState } from './rssView.js';
+import createUrlSchema from './utilities/urlSchema.js';
 
 const app = (i18next) => {
-  // RSS Form component
-  const urlSchema = object(
-    { url: string().url().required() },
-  );
+  // Load RSS Form component
+  const urlSchema = createUrlSchema();
 
   rssFormInputElement.addEventListener('input', (e) => {
     watchedState.rssForm.url = e.target.value;
+
     urlSchema.validate(watchedState.rssForm)
       .then((r) => {
-        const lastIndex = watchedState.rssUrls.length;
-        watchedState.rssUrls[lastIndex] = r.url;
-        watchedState.errors = '';
+        watchedState.rssUrl = r.url;
+        watchedState.errors = [];
         watchedState.state = 'filling';
       })
       .catch((err) => {
-        const errorMessageKey = `rssForm.errorMessages.${err.path}`;
+        const errorMessageKey = `rssForm.${err.errors}`;
         watchedState.errors = i18next.t(errorMessageKey);
         watchedState.state = 'error';
       });
@@ -27,11 +25,22 @@ const app = (i18next) => {
   rssFormButtonElement.addEventListener('click', (e) => {
     e.preventDefault();
     watchedState.state = 'sending';
-    watchedState.state = 'sent';
-  });
 
-  // Change language by default
-  changeLanguage(i18next, 'en');
+    axios.get('https://allorigins.hexlet.app/get?disableCache=true&url=https://lorem-rss.hexlet.app/feed')
+      .then(({ data }) => {
+        if (data) {
+          return new window.DOMParser().parseFromString(data.contents, 'text/xml');
+        }
+        throw Error('Something went wrong. Please, try again');
+      })
+      .then((rss) => console.log(rss))
+      .then(() => {
+        watchedState.state = 'sent';
+      })
+      .catch((err) => {
+        watchedState.errors = err.message;
+      });
+  });
 };
 
 export default app;
