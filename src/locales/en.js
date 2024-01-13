@@ -6,18 +6,9 @@ export default {
       inputText: 'RSS link',
       buttonText: 'Add new',
       descriptionText: 'Example : https://lorem-rss.hexlet.app/feed',
-      hasNotErrors: '',
-      errorMessages: {
-        mixed: {
-          default: 'Invalid value',
-          required: 'Field is required',
-        },
-        string: {
-          url: 'Invalid URL format',
-          required: 'Field is required',
-        },
-        url: 'Invalid URL format',
-      },
+      errorMessages: '',
+      urlInvalid: 'Invalid URL format',
+      urlRequired: 'Url should be not empty',
     },
 
   },

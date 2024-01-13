@@ -6,18 +6,9 @@ export default {
       inputText: 'Ссылка RSS',
       buttonText: 'Добавить',
       descriptionText: 'Пример: https://lorem-rss.hexlet.app/feed',
-      hasNotErrors: '',
-      errorMessages: {
-        mixed: {
-          default: 'Неверное значение',
-          required: 'Поле обязательно для заполнения',
-        },
-        string: {
-          url: 'Неверный формат URL',
-          required: 'Поле обязательно для заполнения',
-        },
-        url: 'Неверный формат URL',
-      },
+      errorMessages: '',
+      urlInvalid: 'Ссылка должна быть валидным URL',
+      urlRequired: 'URL не должен быть пустым',
     },
   },
 };
