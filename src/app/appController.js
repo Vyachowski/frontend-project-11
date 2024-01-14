@@ -1,8 +1,8 @@
 import axios from 'axios';
-import parseXmlDocument from './utilities/parseXmlDocument.js';
-import createUrlSchema from './utilities/createUrlSchema.js';
-import createRssLink from './utilities/createRssLink.js';
-import { setState, watchedState } from './appView.js';
+import parseXmlDocument from '../utilities/parseXmlDocument.js';
+import createUrlSchema from '../utilities/createUrlSchema.js';
+import createRssLink from '../utilities/createRssLink.js';
+import { setState, watchedState } from './appModel.js';
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
