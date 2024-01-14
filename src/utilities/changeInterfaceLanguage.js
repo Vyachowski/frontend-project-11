@@ -1,4 +1,4 @@
-// function changeLanguage(i18instance, language) {
+// function changeInterfaceLanguage(i18instance, language) {
 //   i18instance.changeLanguage(language)
 //     .then(() => {
 //       document.querySelectorAll('[data-i18n]').forEach((element) => {
