@@ -4,6 +4,7 @@ import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
 import { setState, watchedState } from './appModel.js';
 import getElementText from '../utilities/getElementText.js';
+import uniqueId from "lodash.uniqueid";
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -43,11 +44,12 @@ const formController = (e) => {
         const title = getElementText('title', item);
         const description = getElementText('description', item);
         const link = getElementText('link', item);
-        const id = link.split('/').at(-1);
+        const id = uniqueId();
         watchedState.posts.push({
           id, title, description, link,
         });
       });
+      const params = { feed: watchedState.feed, posts: watchedState.posts };
       setState('sent');
     })
     .catch((err) => {

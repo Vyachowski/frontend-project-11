@@ -1,7 +1,7 @@
 import onChange from 'on-change';
 import {
   render,
-} from './render.js';
+} from './render/index.js';
 
 const initialState = {
   feed: {}, // { title, description}
@@ -15,13 +15,11 @@ const initialState = {
 };
 
 const watchedState = onChange(initialState, (path, value) => {
-  const {
-    errors, posts, title, description,
-  } = watchedState;
-
+  const { errors, feed,posts} = watchedState;
+  const feedInfo = {feed, posts};
   if (path === 'state') {
     value === 'sent'
-      ? render(value, posts, title, description)
+      ? render(value, feedInfo)
       : render(value, errors);
   }
   if (path === 'errors' && errors !== '') render('error', errors);
