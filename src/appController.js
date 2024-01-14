@@ -1,21 +1,21 @@
 import axios from 'axios';
 import createUrlSchema from './utilities/urlSchema.js';
-import { watchedState } from './rssView.js';
+import { setState, watchedState } from './appView.js';
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
   const urlSchema = createUrlSchema();
+  const params = {};
 
   urlSchema.validate(watchedState.rssForm)
     .then((r) => {
-      watchedState.rssUrl = r.url;
-      watchedState.errors = [];
-      watchedState.state = 'filling';
+      params.url = r.url;
+      setState('filling', params);
     })
     .catch((err) => {
       const errorMessageKey = `rssForm.${err.errors}`;
-      watchedState.errors = i18next.t(errorMessageKey);
-      watchedState.state = 'error';
+      params.errorText = i18next.t(errorMessageKey);
+      setState('error', params);
     });
 };
 

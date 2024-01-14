@@ -41,6 +41,31 @@ const watchedState = onChange(initialState, (path, value) => {
   if (path === 'errors') feedbackMessageElement.textContent = watchedState.errors;
 });
 
+const setState = (state, params = {}) => {
+  const states = {
+    error: ({ errorText }) => {
+      watchedState.errors = errorText;
+      watchedState.state = 'error';
+    },
+    filling: ({ url }) => {
+      watchedState.rssUrl = url;
+      watchedState.errors = [];
+      watchedState.state = 'filling';
+    },
+    sending: () => {
+      watchedState.state = 'sending';
+    },
+    sent: () => {
+      watchedState.state = 'sent';
+    },
+  };
+
+  states[state](params);
+};
+
 export {
-  rssFormInputElement, rssFormElement, watchedState,
+  rssFormInputElement,
+  rssFormElement,
+  watchedState,
+  setState,
 };
