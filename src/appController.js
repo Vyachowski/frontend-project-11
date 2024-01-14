@@ -1,5 +1,7 @@
 import axios from 'axios';
+import parseXmlDocument from './utilities/parseXmlDocument.js';
 import createUrlSchema from './utilities/createUrlSchema.js';
+import createRssLink from './utilities/createRssLink.js';
 import { setState, watchedState } from './appView.js';
 
 const inputController = (e, i18next) => {
@@ -20,21 +22,26 @@ const inputController = (e, i18next) => {
 
 const formController = (e) => {
   e.preventDefault();
-  watchedState.state = 'sending';
+  setState('sending');
+  const rssFeedLink = watchedState.rssUrl;
+  const rssLink = createRssLink(rssFeedLink);
 
-  axios.get('https://allorigins.hexlet.app/get?disableCache=true&url=https://lorem-rss.hexlet.app/feed')
+  axios.get(rssLink)
     .then(({ data }) => {
       if (data) {
-        return new window.DOMParser().parseFromString(data.contents, 'text/xml');
+        const { contents } = data;
+        return parseXmlDocument(contents);
       }
-      throw Error('Something went wrong. Please, try again');
+      throw new Error('Something went wrong. Please, try again');
     })
-    .then((rss) => console.log(rss))
+    .then((rssDocument) => { watchedState.rssDocument = rssDocument; return true; })
     .then(() => {
-      watchedState.state = 'sent';
+      console.log(watchedState.rssDocument);
+      setState('sent')
     })
     .catch((err) => {
-      watchedState.errors = err.message;
+      const params = { errorText: err.message };
+      setState('error', params);
     });
 };
 

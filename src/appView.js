@@ -7,7 +7,7 @@ const rssFormElement = document.querySelector('.rss-form');
 const [rssFormInputElement, rssFormButtonElement] = rssFormElement.elements;
 
 const initialState = {
-  // rssList:[],
+  rssDocument:null,
   rssUrl: null,
   state: null,
   rssForm: {
