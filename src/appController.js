@@ -1,5 +1,5 @@
 import axios from 'axios';
-import createUrlSchema from './utilities/urlSchema.js';
+import createUrlSchema from './utilities/createUrlSchema.js';
 import { setState, watchedState } from './appView.js';
 
 const inputController = (e, i18next) => {

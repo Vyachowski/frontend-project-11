@@ -1,4 +1,5 @@
 import onChange from 'on-change';
+import changeElementText from './utilities/changeElementText.js';
 
 const feedbackMessageElement = document.querySelector('.feedback');
 const rssFormElement = document.querySelector('.rss-form');
@@ -17,13 +18,14 @@ const initialState = {
 const watchedState = onChange(initialState, (path, value) => {
   const renderInterface = {
     error: () => {
+      changeElementText(feedbackMessageElement, watchedState.errors);
       feedbackMessageElement.classList.remove('text-success');
       feedbackMessageElement.classList.add('text-danger');
       rssFormInputElement.classList.add('is-invalid');
       rssFormButtonElement.disabled = true;
     },
     filling: () => {
-      feedbackMessageElement.textContent = '';
+      changeElementText(feedbackMessageElement, '');
       rssFormInputElement.classList.remove('is-invalid');
       rssFormButtonElement.disabled = false;
     },
@@ -33,12 +35,12 @@ const watchedState = onChange(initialState, (path, value) => {
     sent: () => {
       feedbackMessageElement.classList.remove('text-danger');
       feedbackMessageElement.classList.add('text-success');
-      rssFormInputElement.value = '';
+      changeElementText(rssFormInputElement, '');
     },
   };
 
   if (path === 'state') renderInterface[value]();
-  if (path === 'errors') feedbackMessageElement.textContent = watchedState.errors;
+  if (path === 'errors') watchedState.errors !== '' && renderInterface.error();
 });
 
 const setState = (state, params = {}) => {
@@ -49,7 +51,7 @@ const setState = (state, params = {}) => {
     },
     filling: ({ url }) => {
       watchedState.rssUrl = url;
-      watchedState.errors = [];
+      watchedState.errors = '';
       watchedState.state = 'filling';
     },
     sending: () => {
