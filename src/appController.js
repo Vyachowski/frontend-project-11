@@ -36,7 +36,6 @@ const formController = (e) => {
     })
     .then((rssDocument) => { watchedState.rssDocument = rssDocument; return true; })
     .then(() => {
-      console.log(watchedState.rssDocument);
       setState('sent')
     })
     .catch((err) => {
