@@ -1,7 +1,7 @@
-import renderError from './renderError.js';
-import renderFilling from './renderFilling.js';
-import renderSending from './renderSending.js';
-import renderSent from './renderSent.js';
+import renderError from './renderers/renderError.js';
+import renderFilling from './renderers/renderFilling.js';
+import renderSending from './renderers/renderSending.js';
+import renderSent from './renderers/renderSent.js';
 
 const render = (state, params) => {
   const elements = {

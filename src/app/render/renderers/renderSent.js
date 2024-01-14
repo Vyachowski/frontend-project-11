@@ -1,6 +1,6 @@
-import createFeedList from '../../utilities/createFeedList.js';
-import setElementStyle from '../../utilities/setElementStyle.js';
-import setElementText from '../../utilities/setElementText.js';
+import createFeedList from '../../../utilities/createFeedList.js';
+import setElementStyle from '../../../utilities/setElementStyle.js';
+import setElementText from '../../../utilities/setElementText.js';
 
 const renderSent = (params, elements) => {
   const { messageElement, inputElement } = elements;

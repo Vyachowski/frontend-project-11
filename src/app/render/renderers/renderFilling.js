@@ -1,5 +1,5 @@
-import setElementText from '../../utilities/setElementText.js';
-import setElementStyle from '../../utilities/setElementStyle.js';
+import setElementText from '../../../utilities/setElementText.js';
+import setElementStyle from '../../../utilities/setElementStyle.js';
 
 const renderFilling = (params, elements) => {
   const { messageElement, inputElement, buttonElement } = elements;
