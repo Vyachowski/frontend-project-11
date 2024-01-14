@@ -27,11 +27,19 @@ const renderSent = () => {
   changeElementText(inputElement, '');
 };
 
+const render = (state, error) => {
+  const mapping = {
+    error: (err) => renderError(err),
+    filling: renderFilling,
+    sending: renderSending,
+    sent: renderSent,
+  };
+
+  mapping[state](error);
+}
+
 export {
-  renderError,
-  renderFilling,
-  renderSending,
-  renderSent,
+  render,
   messageElement,
   formElement,
   inputElement,

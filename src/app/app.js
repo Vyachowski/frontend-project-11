@@ -1,4 +1,4 @@
-import { inputElement, formElement } from './appView.js';
+import { inputElement, formElement } from './render.js';
 import { inputController, formController } from './appController.js';
 
 const app = (i18next) => {

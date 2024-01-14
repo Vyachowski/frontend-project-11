@@ -1,7 +1,7 @@
 import onChange from 'on-change';
 import {
-  renderError, renderFilling, renderSending, renderSent,
-} from './appView.js';
+  render,
+} from './render.js';
 
 const initialState = {
   rssDocument: null,
@@ -15,15 +15,9 @@ const initialState = {
 
 const watchedState = onChange(initialState, (path, value) => {
   const { errors } = watchedState;
-  const renderInterface = {
-    error: (err) => renderError(err),
-    filling: renderFilling,
-    sending: renderSending,
-    sent: renderSent,
-  };
 
-  if (path === 'state') renderInterface[value](errors);
-  if (path === 'errors' && errors !== '') renderInterface.error(errors);
+  if (path === 'state') render(value, errors);
+  if (path === 'errors' && errors !== '') render('error', errors);
 });
 
 const setState = (state, params = {}) => {
