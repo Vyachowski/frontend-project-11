@@ -42,5 +42,5 @@ const watchedState = onChange(initialState, (path, value) => {
 });
 
 export {
-  rssFormInputElement, rssFormButtonElement, watchedState,
+  rssFormInputElement, rssFormElement, watchedState,
 };
