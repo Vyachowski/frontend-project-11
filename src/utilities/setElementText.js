@@ -1,4 +1,4 @@
-const changeElementText = (element, text) => {
+const setElementText = (element, text) => {
   const newElement = element;
   if (!element.value) {
     newElement.textContent = text;
@@ -7,4 +7,4 @@ const changeElementText = (element, text) => {
   newElement.value = text;
 };
 
-export default changeElementText;
+export default setElementText;
