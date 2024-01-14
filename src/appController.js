@@ -34,8 +34,8 @@ const formController = (e) => {
       }
       throw new Error('Something went wrong. Please, try again');
     })
-    .then((rssDocument) => { watchedState.rssDocument = rssDocument; return true; })
-    .then(() => {
+    .then((rssDocument) => {
+      watchedState.rssDocument = rssDocument;
       setState('sent')
     })
     .catch((err) => {
