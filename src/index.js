@@ -10,7 +10,7 @@ const runApp = () => {
     debug: true,
     resources,
   }).then(() => app(i18nextInstance))
-    .catch((err) => console.log(err));
+    .catch((err) => console.log(err)); // Add modal window
 };
 
 runApp();
