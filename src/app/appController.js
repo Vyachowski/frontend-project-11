@@ -3,6 +3,7 @@ import parseXmlDocument from '../utilities/parseXmlDocument.js';
 import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
 import { setState, watchedState } from './appModel.js';
+import getElementText from '../utilities/getElementText.js';
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -35,7 +36,18 @@ const formController = (e) => {
       throw new Error('Something went wrong. Please, try again');
     })
     .then((rssDocument) => {
-      watchedState.rssDocument = rssDocument;
+      const itemElements = rssDocument.querySelectorAll('item');
+      watchedState.feed.title = getElementText('title', rssDocument);
+      watchedState.feed.description = getElementText('description', rssDocument);
+      itemElements.forEach((item) => {
+        const title = getElementText('title', item);
+        const description = getElementText('description', item);
+        const link = getElementText('link', item);
+        const id = link.split('/').at(-1);
+        watchedState.posts.push({
+          id, title, description, link,
+        });
+      });
       setState('sent');
     })
     .catch((err) => {

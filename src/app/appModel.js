@@ -4,7 +4,8 @@ import {
 } from './render.js';
 
 const initialState = {
-  rssDocument: null,
+  feed: {}, // { title, description}
+  posts: [], // [{ id, title, description, link }]
   rssUrl: null,
   state: null,
   rssForm: {
