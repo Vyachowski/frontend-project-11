@@ -11,8 +11,6 @@ const render = (state, params) => {
     buttonElement: document.querySelector('.rss-form button'),
   };
 
-  const options = { params, ...elements };
-
   const mapping = {
     error: renderError,
     filling: renderFilling,
@@ -20,7 +18,7 @@ const render = (state, params) => {
     sent: renderSent,
   };
 
-  mapping[state](options);
+  mapping[state](params, elements);
 };
 
 export default render;

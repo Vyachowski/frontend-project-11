@@ -14,15 +14,15 @@ const initialState = {
 
 const watchedState = onChange(initialState, (path, value) => {
   const { errors, feed, posts } = watchedState;
-  const feedInfo = { feed, posts };
+  const data = { errors, feed, posts };
+
   if (path === 'state') {
-    if (!(value !== 'sent')) {
-      render(value, feedInfo);
-    } else {
-      render(value, errors);
-    }
+    render(value, data);
   }
-  if (path === 'errors' && errors !== '') render('error', errors);
+
+  if (path === 'errors' && errors !== '') {
+    render('error', data);
+  }
 });
 
 const setState = (state, params = {}) => {

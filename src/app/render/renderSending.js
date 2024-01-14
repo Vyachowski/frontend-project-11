@@ -1,5 +1,5 @@
-const renderSending = (options) => {
-  const { buttonElement } = options;
+const renderSending = (params, elements) => {
+  const { buttonElement } = elements;
   buttonElement.disabled = true;
 };
 

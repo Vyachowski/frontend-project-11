@@ -2,8 +2,8 @@ import createFeedList from '../../utilities/createFeedList.js';
 import setElementStyle from '../../utilities/setElementStyle.js';
 import setElementText from '../../utilities/setElementText.js';
 
-const renderSent = (options) => {
-  const { params, messageElement, inputElement } = options;
+const renderSent = (params, elements) => {
+  const { messageElement, inputElement } = elements;
   const { posts, feed } = params;
   const feedTitle = document.querySelector('.feed-title');
   const feedDescription = document.querySelector('.feed-description');
