@@ -1,10 +1,10 @@
-const changeElementText = (element, message) => {
+const changeElementText = (element, text) => {
   const newElement = element;
   if (!element.value) {
-    newElement.textContent = message;
+    newElement.textContent = text;
     return;
   }
-  newElement.value = message;
+  newElement.value = text;
 };
 
 export default changeElementText;
