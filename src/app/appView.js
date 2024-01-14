@@ -11,6 +11,7 @@ const renderError = (errorText) => {
   setElementStyle(inputElement, 'invalid');
   buttonElement.disabled = true;
 };
+
 const renderFilling = () => {
   changeElementText(messageElement, '');
   setElementStyle(inputElement, 'valid');
