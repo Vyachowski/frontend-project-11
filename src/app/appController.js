@@ -1,10 +1,10 @@
 import axios from 'axios';
-import uniqueId from 'lodash.uniqueid';
 import parseXmlDocument from '../utilities/parseXmlDocument.js';
 import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
 import { setState, watchedState } from './appModel.js';
 import getElementText from '../utilities/getElementText.js';
+import createPostList from '../utilities/createPostList.js';
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -36,17 +36,9 @@ const formController = (e) => {
     })
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
+      watchedState.posts = createPostList(itemElements);
       watchedState.feed.title = getElementText('title', rssDocument);
       watchedState.feed.description = getElementText('description', rssDocument);
-      itemElements.forEach((item) => {
-        const title = getElementText('title', item);
-        const description = getElementText('description', item);
-        const link = getElementText('link', item);
-        const id = uniqueId();
-        watchedState.posts.push({
-          id, title, description, link,
-        });
-      });
       setState('sent');
     })
     .catch((err) => {
