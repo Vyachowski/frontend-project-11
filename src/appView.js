@@ -1,5 +1,6 @@
 import onChange from 'on-change';
 import changeElementText from './utilities/changeElementText.js';
+import setElementStyle from './utilities/setElementStyle.js';
 
 const feedbackMessageElement = document.querySelector('.feedback');
 const rssFormElement = document.querySelector('.rss-form');
@@ -19,28 +20,26 @@ const watchedState = onChange(initialState, (path, value) => {
   const renderInterface = {
     error: () => {
       changeElementText(feedbackMessageElement, watchedState.errors);
-      feedbackMessageElement.classList.remove('text-success');
-      feedbackMessageElement.classList.add('text-danger');
-      rssFormInputElement.classList.add('is-invalid');
+      setElementStyle(feedbackMessageElement, 'danger');
+      setElementStyle(rssFormInputElement, 'invalid');
       rssFormButtonElement.disabled = true;
     },
     filling: () => {
       changeElementText(feedbackMessageElement, '');
-      rssFormInputElement.classList.remove('is-invalid');
+      setElementStyle(rssFormInputElement, 'valid');
       rssFormButtonElement.disabled = false;
     },
     sending: () => {
       rssFormButtonElement.disabled = true;
     },
     sent: () => {
-      feedbackMessageElement.classList.remove('text-danger');
-      feedbackMessageElement.classList.add('text-success');
+      setElementStyle(feedbackMessageElement, 'success');
       changeElementText(rssFormInputElement, '');
     },
   };
 
   if (path === 'state') renderInterface[value]();
-  if (path === 'errors') watchedState.errors !== '' && renderInterface.error();
+  if (path === 'errors' && watchedState.errors !== '') renderInterface.error();
 });
 
 const setState = (state, params = {}) => {
