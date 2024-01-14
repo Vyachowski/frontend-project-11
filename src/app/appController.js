@@ -24,7 +24,7 @@ const formController = (e) => {
   e.preventDefault();
   setState('sending');
   const rssFeedLink = watchedState.rssUrl;
-  const rssLink = createRssLink(rssFeedLink);
+  const { href: rssLink } = createRssLink(rssFeedLink);
 
   axios.get(rssLink)
     .then(({ data }) => {

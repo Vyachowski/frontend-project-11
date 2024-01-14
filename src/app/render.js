@@ -36,7 +36,7 @@ const render = (state, error) => {
   };
 
   mapping[state](error);
-}
+};
 
 export {
   render,
