@@ -1,7 +1,5 @@
 import onChange from 'on-change';
-import {
-  render,
-} from './render/index.js';
+import render from './render/index.js';
 
 const initialState = {
   feed: {}, // { title, description}
@@ -15,12 +13,14 @@ const initialState = {
 };
 
 const watchedState = onChange(initialState, (path, value) => {
-  const { errors, feed,posts} = watchedState;
-  const feedInfo = {feed, posts};
+  const { errors, feed, posts } = watchedState;
+  const feedInfo = { feed, posts };
   if (path === 'state') {
-    value === 'sent'
-      ? render(value, feedInfo)
-      : render(value, errors);
+    if (!(value !== 'sent')) {
+      render(value, feedInfo);
+    } else {
+      render(value, errors);
+    }
   }
   if (path === 'errors' && errors !== '') render('error', errors);
 });

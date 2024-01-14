@@ -1,10 +1,10 @@
 import axios from 'axios';
+import uniqueId from 'lodash.uniqueid';
 import parseXmlDocument from '../utilities/parseXmlDocument.js';
 import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
 import { setState, watchedState } from './appModel.js';
 import getElementText from '../utilities/getElementText.js';
-import uniqueId from "lodash.uniqueid";
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -30,11 +30,9 @@ const formController = (e) => {
 
   axios.get(rssLink)
     .then(({ data }) => {
-      if (data) {
-        const { contents } = data;
-        return parseXmlDocument(contents);
-      }
-      throw new Error('Something went wrong. Please, try again');
+      if (!data) throw new Error('Something went wrong. Please, try again');
+      const { contents } = data;
+      return parseXmlDocument(contents);
     })
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
@@ -49,7 +47,6 @@ const formController = (e) => {
           id, title, description, link,
         });
       });
-      const params = { feed: watchedState.feed, posts: watchedState.posts };
       setState('sent');
     })
     .catch((err) => {

@@ -1,14 +1,21 @@
-import createFeedList from "../../utilities/createFeedList.js";
-import setElementStyle from "../../utilities/setElementStyle.js";
-import setElementText from "../../utilities/setElementText.js";
-import {inputElement, messageElement} from "./index.js";
+import createFeedList from '../../utilities/createFeedList.js';
+import setElementStyle from '../../utilities/setElementStyle.js';
+import setElementText from '../../utilities/setElementText.js';
 
-const renderSent = ({posts, feed}) => {
+const renderSent = (options) => {
+  const { params, messageElement, inputElement } = options;
+  const { posts, feed } = params;
+  const feedTitle = document.querySelector('.feed-title');
+  const feedDescription = document.querySelector('.feed-description');
   const listGroup = document.querySelector('.list-group');
+
   const feedList = createFeedList(posts);
   setElementStyle(messageElement, 'success');
   setElementText(messageElement, 'RSS успешно загружен'); // TODO Change to dynamic message
   setElementText(inputElement, '');
+  setElementText(feedTitle, feed.title);
+  setElementText(feedDescription, feed.title);
+
   feedList.forEach((item) => listGroup.appendChild(item));
 };
 

@@ -1,8 +1,8 @@
-import setElementText from "../../utilities/setElementText.js";
-import setElementStyle from "../../utilities/setElementStyle.js";
-import {buttonElement, inputElement, messageElement} from "./index.js";
+import setElementText from '../../utilities/setElementText.js';
+import setElementStyle from '../../utilities/setElementStyle.js';
 
-const renderFilling = () => {
+const renderFilling = (options) => {
+  const { messageElement, inputElement, buttonElement } = options;
   setElementText(messageElement, '');
   setElementStyle(inputElement, 'valid');
   buttonElement.disabled = false;

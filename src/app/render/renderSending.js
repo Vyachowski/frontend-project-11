@@ -1,6 +1,5 @@
-import {buttonElement} from "./index.js";
-
-const renderSending = () => {
+const renderSending = (options) => {
+  const { buttonElement } = options;
   buttonElement.disabled = true;
 };
 

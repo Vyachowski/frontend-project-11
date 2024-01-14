@@ -1,5 +1,5 @@
-import createElementWithClasses from "./createElements.js";
-import setAttributesToElement from "./setAttributesToElement.js";
+import createElementWithClasses from './createElements.js';
+import setAttributesToElement from './setAttributesToElement.js';
 
 const createFeedListButtonElement = (id) => {
   const buttonClasses = ['btn', 'btn-outline-primary', 'btn-sm'];

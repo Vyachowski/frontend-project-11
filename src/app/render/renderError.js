@@ -1,8 +1,10 @@
-import setElementText from "../../utilities/setElementText.js";
-import setElementStyle from "../../utilities/setElementStyle.js";
-import {buttonElement, inputElement, messageElement} from "./index.js";
+import setElementText from '../../utilities/setElementText.js';
+import setElementStyle from '../../utilities/setElementStyle.js';
 
-const renderError = (errorText) => {
+const renderError = (options) => {
+  const {
+    params: errorText, messageElement, inputElement, buttonElement,
+  } = options;
   setElementText(messageElement, errorText);
   setElementStyle(messageElement, 'danger');
   setElementStyle(inputElement, 'invalid');

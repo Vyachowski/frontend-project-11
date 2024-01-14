@@ -1,27 +1,26 @@
-import renderError from "./renderError.js";
-import renderFilling from "./renderFilling.js";
-import renderSending from "./renderSending.js";
-import renderSent from "./renderSent.js";
-
-const messageElement = document.querySelector('.feedback');
-const formElement = document.querySelector('.rss-form');
-const [inputElement, buttonElement] = formElement.elements;
+import renderError from './renderError.js';
+import renderFilling from './renderFilling.js';
+import renderSending from './renderSending.js';
+import renderSent from './renderSent.js';
 
 const render = (state, params) => {
-  const mapping = {
-    error: (err) => renderError(err),
-    filling: renderFilling,
-    sending: renderSending,
-    sent: (info) => renderSent(info),
+  const elements = {
+    messageElement: document.querySelector('.feedback'),
+    formElement: document.querySelector('.rss-form'),
+    inputElement: document.querySelector('.rss-form input'),
+    buttonElement: document.querySelector('.rss-form button'),
   };
 
-  mapping[state](params);
+  const options = { params, ...elements };
+
+  const mapping = {
+    error: renderError,
+    filling: renderFilling,
+    sending: renderSending,
+    sent: renderSent,
+  };
+
+  mapping[state](options);
 };
 
-export {
-  render,
-  messageElement,
-  formElement,
-  inputElement,
-  buttonElement,
-};
+export default render;
