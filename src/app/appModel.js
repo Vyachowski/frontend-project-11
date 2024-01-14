@@ -15,9 +15,15 @@ const initialState = {
 };
 
 const watchedState = onChange(initialState, (path, value) => {
-  const { errors } = watchedState;
+  const {
+    errors, posts, title, description,
+  } = watchedState;
 
-  if (path === 'state') render(value, errors);
+  if (path === 'state') {
+    value === 'sent'
+      ? render(value, posts, title, description)
+      : render(value, errors);
+  }
   if (path === 'errors' && errors !== '') render('error', errors);
 });
 
