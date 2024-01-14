@@ -5,16 +5,15 @@ import { setState, watchedState } from './appView.js';
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
   const urlSchema = createUrlSchema();
-  const params = {};
 
   urlSchema.validate(watchedState.rssForm)
-    .then((r) => {
-      params.url = r.url;
+    .then(({ url }) => {
+      const params = { url };
       setState('filling', params);
     })
     .catch((err) => {
       const errorMessageKey = `rssForm.${err.errors}`;
-      params.errorText = i18next.t(errorMessageKey);
+      const params = { errorText: i18next.t(errorMessageKey) };
       setState('error', params);
     });
 };
