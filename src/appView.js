@@ -8,12 +8,12 @@ const [rssFormInputElement, rssFormButtonElement] = rssFormElement.elements;
 
 const initialState = {
   // rssList:[],
-  rssUrl: '',
+  rssUrl: null,
   state: null,
   rssForm: {
     url: null,
   },
-  errors: '',
+  errors: null,
 };
 
 const watchedState = onChange(initialState, (path, value) => {
