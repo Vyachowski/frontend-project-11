@@ -36,7 +36,7 @@ const formController = (e) => {
     })
     .then((rssDocument) => {
       watchedState.rssDocument = rssDocument;
-      setState('sent')
+      setState('sent');
     })
     .catch((err) => {
       const params = { errorText: err.message };
