@@ -5,8 +5,8 @@ const setElementStyle = (element, style) => {
   const INVALID_CLASS = 'is-invalid';
   const mapping = {
     success: () => {
-      newElement.classList.remove(SUCCESS_CLASS);
-      newElement.classList.add(DANGER_CLASS);
+      newElement.classList.add(SUCCESS_CLASS);
+      newElement.classList.remove(DANGER_CLASS);
     },
     danger: () => {
       newElement.classList.remove(SUCCESS_CLASS);
