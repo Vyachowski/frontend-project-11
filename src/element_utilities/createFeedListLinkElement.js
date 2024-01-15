@@ -7,7 +7,7 @@ const createFeedListLinkElement = (link, id, text) => {
     href: link,
     'data-id': id,
     target: '_blank',
-    rel: ['noopener', 'noreferrer'],
+    rel: 'noopener noreferrer',
   };
 
   const linkElement = createElementWithClasses('a', linkClasses);
