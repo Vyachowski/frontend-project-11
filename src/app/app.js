@@ -1,4 +1,5 @@
 import { inputController, formController } from './appController.js';
+import createWatchedState from './appModel.js';
 
 const app = (i18next) => {
   const formElement = document.querySelector('.rss-form');

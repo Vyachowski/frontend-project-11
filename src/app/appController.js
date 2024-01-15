@@ -5,30 +5,28 @@ import createRssLink from '../other_utilities/createRssLink.js';
 import getElementText from '../element_utilities/getElementText.js';
 import createPostList from '../other_utilities/createPostList.js';
 import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
-import { setState, watchedState } from './appModel.js';
 
-const inputController = (e, i18next) => {
-  watchedState.rssForm.url = e.target.value;
+const inputController = (e, watchedState, setState) => {
+  const feedLink = { url: e.target.value };
   const urlSchema = createUrlSchema();
 
-  urlSchema.validate(watchedState.rssForm)
+  urlSchema.validate(feedLink)
     .then(({ url }) => {
       const params = { url };
       setState('filling', params);
     })
-    .catch((err) => {
-      const errorMessageKey = `rssForm.${err.errors}`;
-      const params = { errorText: i18next.t(errorMessageKey) };
+    .catch(({ message }) => {
+      const params = watchedState.translation.errors[message];
       setState('error', params);
     });
 };
 
-const formController = (e, i18next) => {
+const formController = (e, watchedState, setState) => {
   e.preventDefault();
   const feedLink = setState('sending');
   const { href: rssLink } = createRssLink(feedLink);
 
-  fetchRssFeed(rssLink, i18next)
+  fetchRssFeed(rssLink)
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
@@ -41,8 +39,8 @@ const formController = (e, i18next) => {
       };
       setState('sent', params);
     })
-    .catch((err) => {
-      const params = { errorText: err.message };
+    .catch(({ message }) => {
+      const params = watchedState.translation.errors[message];
       setState('error', params);
     });
 };
