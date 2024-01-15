@@ -1,14 +1,13 @@
 import setElementText from '../../../element_utilities/setElementText.js';
 import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
-const renderRejected = (elements, params) => {
+const renderRejected = (elements, {errors}) => {
   const { messageElement, inputElement, buttonElement } = elements;
-  const { errors } = params;
 
+  buttonElement.disabled = false;
   setElementText(messageElement, errors);
   setElementStyle(messageElement, 'danger');
   setElementStyle(inputElement, 'invalid');
-  buttonElement.disabled = false;
 };
 
 export default renderRejected;
