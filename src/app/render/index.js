@@ -2,7 +2,7 @@ import renderErrors from './renderers/renderErrors.js';
 import renderFilling from './renderers/renderFilling.js';
 import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
-import renderRejected from "./renderers/renderRejected.js";
+import renderRejected from './renderers/renderRejected.js';
 
 const render = (state, params) => {
   const elements = {

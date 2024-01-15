@@ -16,8 +16,7 @@ const fetchRssFeed = (rssLink) => axios
     }
     if (error.request) {
       throw new Error('networkError');
-    }
-    else {
+    } else {
       throw new Error('error');
     }
   });

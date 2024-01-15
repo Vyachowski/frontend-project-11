@@ -48,7 +48,7 @@ const createWatchedState = (i18next) => {
       rejected: (errorText) => {
         watchedState.errors = errorText;
         watchedState.state = 'rejected';
-      }
+      },
     };
     return states[state](params);
   };
