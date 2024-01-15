@@ -13,5 +13,12 @@ export default {
       urlRequired: 'URL не должен быть пустым',
       xmlError: 'Некорректный формат данных: не является XML/RSS',
     },
+    post: {
+      title: 'Посты',
+      button: 'Просмотр',
+    },
+    feed: {
+      title: 'Фиды',
+    },
   },
 };

@@ -13,5 +13,12 @@ export default {
       urlRequired: 'Url should be not empty',
       xmlError: 'Invalid response format: not a XML/RSS',
     },
+    post: {
+      title: 'Posts',
+      button: 'Show',
+    },
+    feed: {
+      title: 'Feeds',
+    },
   },
 };
