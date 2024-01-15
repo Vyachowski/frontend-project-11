@@ -11,7 +11,7 @@ export default {
       errorMessages: '',
       urlInvalid: 'Ссылка должна быть валидным URL',
       urlRequired: 'URL не должен быть пустым',
-      xmlError: 'Некорректный формат данных: не является XML RSS',
+      xmlError: 'Некорректный формат данных: не является XML/RSS',
     },
   },
 };
