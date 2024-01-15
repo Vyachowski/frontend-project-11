@@ -2,8 +2,8 @@ import onChange from 'on-change';
 import render from './render/index.js';
 
 const initialState = {
-  feed: {}, // { title, description}
-  posts: [], // [{ id, title, description, link }]
+  feed: {}, // { id, title, description}
+  posts: [], // [{ id, feedId, title, description, link }]
   rssUrl: null,
   state: null,
   rssForm: {

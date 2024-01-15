@@ -1,7 +1,7 @@
 import uniqueId from 'lodash.uniqueid';
 import getElementText from '../element_utilities/getElementText.js';
 
-const createPostList = (elements) => {
+const createPostList = (elements, feedId) => {
   const elementsArray = Array.from(elements);
 
   return elementsArray.map((item) => {
@@ -10,7 +10,7 @@ const createPostList = (elements) => {
     const link = getElementText('link', item);
     const id = uniqueId();
     return {
-      id, title, description, link,
+      id, feedId, title, description, link,
     };
   });
 };

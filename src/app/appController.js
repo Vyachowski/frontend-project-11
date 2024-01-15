@@ -5,6 +5,7 @@ import getElementText from '../element_utilities/getElementText.js';
 import createPostList from '../other_utilities/createPostList.js';
 import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
 import { setState, watchedState } from './appModel.js';
+import uniqueId from "lodash.uniqueid";
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -31,10 +32,12 @@ const formController = (e, i18next) => {
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
+      const feedId = uniqueId('feed_');
       const params = {
+        feedId: feedId,
         feedTitle: getElementText('title', rssDocument),
         feedDescription: getElementText('description', rssDocument),
-        posts: createPostList(itemElements),
+        posts: createPostList(itemElements, feedId),
       };
       setState('sent', params);
     })
