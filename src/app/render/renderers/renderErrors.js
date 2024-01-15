@@ -1,7 +1,7 @@
 import setElementText from '../../../element_utilities/setElementText.js';
 import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
-const renderError = (params, elements) => {
+const renderErrors = (elements, params) => {
   const { messageElement, inputElement, buttonElement } = elements;
   const { errors } = params;
 
@@ -11,4 +11,4 @@ const renderError = (params, elements) => {
   buttonElement.disabled = true;
 };
 
-export default renderError;
+export default renderErrors;
