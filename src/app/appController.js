@@ -13,17 +13,17 @@ const inputController = (e, watchedState, setState) => {
   urlSchema.validate(feedLink)
     .then(({ url }) => {
       const params = { url };
-      setState('filling', params);
+      setState(watchedState, 'filling', params);
     })
     .catch(({ message }) => {
       const params = watchedState.translation.errors[message];
-      setState('error', params);
+      setState(watchedState, 'error', params);
     });
 };
 
 const formController = (e, watchedState, setState) => {
   e.preventDefault();
-  const feedLink = setState('sending');
+  const feedLink = setState(watchedState, 'sending');
   const { href: rssLink } = createRssLink(feedLink);
 
   fetchRssFeed(rssLink)
@@ -37,11 +37,11 @@ const formController = (e, watchedState, setState) => {
         feedDescription: getElementText('description', rssDocument),
         posts: createPostList(itemElements, feedId),
       };
-      setState('sent', params);
+      setState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
       const params = watchedState.translation.errors[message];
-      setState('rejected', params);
+      setState(watchedState, 'rejected', params);
     });
 };
 

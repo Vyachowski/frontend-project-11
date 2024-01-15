@@ -1,7 +1,7 @@
 import setElementText from '../../../element_utilities/setElementText.js';
 import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
-const renderRejected = (elements, {errors}) => {
+const renderRejected = (elements, { errors }) => {
   const { messageElement, inputElement, buttonElement } = elements;
 
   buttonElement.disabled = false;
