@@ -1,5 +1,5 @@
 import axios from 'axios';
-import isXMLDocument from "./isXMLDocument.js";
+import isXMLDocument from './isXMLDocument.js';
 
 const fetchRssFeed = (rssLink, i18next) => axios
   .get(rssLink)
