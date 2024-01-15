@@ -1,13 +1,14 @@
 import axios from 'axios';
+import isXMLDocument from "./isXMLDocument.js";
 
 const fetchRssFeed = (rssLink, i18next) => axios
   .get(rssLink)
   .then((response) => {
-    const contentType = response.headers['content-headers'];
-    if (!contentType || !contentType.includes('application/xml')) {
+    const xmlData = response.data.contents;
+    if (!isXMLDocument(xmlData)) {
       throw new Error(i18next.t('rssForm.xmlError'));
     }
-    return response.data;
+    return xmlData;
   })
   .catch((error) => {
     if (error.response) {
