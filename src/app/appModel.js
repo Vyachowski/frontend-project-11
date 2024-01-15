@@ -2,6 +2,17 @@ import onChange from 'on-change';
 import render from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 
+const setSentState = (usingState, {
+  posts, feedId, feedTitle, feedDescription,
+}) => {
+  const updatedState = usingState;
+
+  updatedState.posts = posts;
+  updatedState.feed.id = feedId;
+  updatedState.feed.title = feedTitle;
+  updatedState.feed.description = feedDescription;
+  updatedState.state = 'sent';
+};
 
 const setState = (currentState, state, params) => {
   const newState = currentState;
@@ -20,21 +31,12 @@ const setState = (currentState, state, params) => {
       newState.state = 'sending';
       return newState.rssUrl;
     },
-    sent: ({
-      posts, feedId, feedTitle, feedDescription,
-    }) => {
-      newState.posts = posts;
-      newState.feed.id = feedId;
-      newState.feed.title = feedTitle;
-      newState.feed.description = feedDescription;
-      newState.state = 'sent';
-    },
+    sent: (sentOptions) => setSentState(newState, sentOptions),
     rejected: (errorText) => {
       newState.errors = errorText;
       newState.state = 'rejected';
     },
   };
-
   return states[state](params);
 };
 
