@@ -7,6 +7,7 @@ export default {
         inputText: 'Ссылка RSS',
         buttonText: 'Добавить',
         descriptionText: 'Пример: https://lorem-rss.hexlet.app/feed',
+        downloadMessage: 'RSS успешно загружен',
       },
       post: {
         title: 'Посты',
@@ -21,7 +22,7 @@ export default {
         errorMessages: '',
         urlInvalid: 'Ссылка должна быть валидным URL',
         urlRequired: 'URL не должен быть пустым',
-        xmlError: 'Некорректный формат данных: не является XML/RSS',
+        xmlError: 'Ресурс не содержит валидный RSS',
       },
     },
   },
