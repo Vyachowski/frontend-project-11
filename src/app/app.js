@@ -5,7 +5,7 @@ const app = (i18next) => {
   const [inputElement] = formElement.elements;
 
   inputElement.addEventListener('input', (e) => inputController(e, i18next));
-  formElement.addEventListener('submit', (e) => formController(e));
+  formElement.addEventListener('submit', (e) => formController(e, i18next));
 };
 
 export default app;
