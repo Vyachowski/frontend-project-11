@@ -1,10 +1,10 @@
-import axios from 'axios';
 import parseXmlDocument from '../utilities/parseXmlDocument.js';
 import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
 import { setState, watchedState } from './appModel.js';
 import getElementText from '../utilities/getElementText.js';
 import createPostList from '../utilities/createPostList.js';
+import fetchRssFeed from "../utilities/fetchRssFeed.js";
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -22,18 +22,13 @@ const inputController = (e, i18next) => {
     });
 };
 
-const formController = (e) => {
+const formController = (e, i18next) => {
   e.preventDefault();
   setState('sending');
   const rssFeedLink = watchedState.rssUrl;
   const { href: rssLink } = createRssLink(rssFeedLink);
-
-  axios.get(rssLink)
-    .then(({ data }) => {
-      if (!data) throw new Error('Something went wrong. Please, try again');
-      const { contents } = data;
-      return parseXmlDocument(contents);
-    })
+  fetchRssFeed(rssLink, i18next)
+    .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
       watchedState.posts = createPostList(itemElements);
