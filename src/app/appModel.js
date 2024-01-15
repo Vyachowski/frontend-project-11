@@ -39,7 +39,10 @@ const setState = (state, params = {}) => {
     sending: () => {
       watchedState.state = 'sending';
     },
-    sent: () => {
+    sent: ({ posts, feedTitle, feedDescription }) => {
+      watchedState.posts = posts;
+      watchedState.feed.title = feedTitle;
+      watchedState.feed.description = feedDescription;
       watchedState.state = 'sent';
     },
   };

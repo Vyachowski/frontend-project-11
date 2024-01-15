@@ -1,10 +1,10 @@
 import parseXmlDocument from '../utilities/parseXmlDocument.js';
 import createUrlSchema from '../utilities/createUrlSchema.js';
 import createRssLink from '../utilities/createRssLink.js';
-import { setState, watchedState } from './appModel.js';
 import getElementText from '../utilities/getElementText.js';
 import createPostList from '../utilities/createPostList.js';
-import fetchRssFeed from "../utilities/fetchRssFeed.js";
+import fetchRssFeed from '../utilities/fetchRssFeed.js';
+import { setState, watchedState } from './appModel.js';
 
 const inputController = (e, i18next) => {
   watchedState.rssForm.url = e.target.value;
@@ -31,10 +31,12 @@ const formController = (e, i18next) => {
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
       const itemElements = rssDocument.querySelectorAll('item');
-      watchedState.posts = createPostList(itemElements);
-      watchedState.feed.title = getElementText('title', rssDocument);
-      watchedState.feed.description = getElementText('description', rssDocument);
-      setState('sent');
+      const params = {
+        feedTitle: getElementText('title', rssDocument),
+        feedDescription: getElementText('description', rssDocument),
+        posts: createPostList(itemElements),
+      };
+      setState('sent', params);
     })
     .catch((err) => {
       const params = { errorText: err.message };
