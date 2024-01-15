@@ -40,8 +40,11 @@ const setState = (state, params = {}) => {
       watchedState.state = 'sending';
       return watchedState.rssUrl;
     },
-    sent: ({ posts, feedTitle, feedDescription }) => {
+    sent: ({
+      posts, feedId, feedTitle, feedDescription,
+    }) => {
       watchedState.posts = posts;
+      watchedState.feed.id = feedId;
       watchedState.feed.title = feedTitle;
       watchedState.feed.description = feedDescription;
       watchedState.state = 'sent';
