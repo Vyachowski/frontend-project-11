@@ -1,7 +1,7 @@
 import createElementWithClasses from './createElementWithClasses.js';
 import setAttributesToElement from './setAttributesToElement.js';
 
-const createFeedListButtonElement = (id) => {
+const createFeedListButtonElement = (id, buttonName) => {
   const buttonClasses = ['btn', 'btn-outline-primary', 'btn-sm'];
   const buttonAttributes = {
     type: 'button',
@@ -11,7 +11,7 @@ const createFeedListButtonElement = (id) => {
   };
 
   const buttonElement = createElementWithClasses('button', buttonClasses);
-  buttonElement.textContent = 'Просмотр';
+  buttonElement.textContent = buttonName;
   return setAttributesToElement(buttonElement, buttonAttributes);
 };
 

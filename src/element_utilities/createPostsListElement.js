@@ -2,11 +2,11 @@ import createFeedItemElement from './createFeedItemElement.js';
 import createFeedListLinkElement from './createFeedListLinkElement.js';
 import createFeedListButtonElement from './createFeedListButtonElement.js';
 
-const createFeedListElement = (posts) => posts.map(({ id, title, link }) => {
+const createPostsListElement = (posts, buttonName) => posts.map(({ id, title, link }) => {
   const postUniqueId = id;
   const itemElement = createFeedItemElement();
   const linkElement = createFeedListLinkElement(link, postUniqueId, title);
-  const listButtonElement = createFeedListButtonElement(postUniqueId);
+  const listButtonElement = createFeedListButtonElement(postUniqueId, buttonName);
 
   itemElement.appendChild(linkElement);
   itemElement.appendChild(listButtonElement);
@@ -14,4 +14,4 @@ const createFeedListElement = (posts) => posts.map(({ id, title, link }) => {
   return itemElement;
 });
 
-export default createFeedListElement;
+export default createPostsListElement;
