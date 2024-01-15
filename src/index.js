@@ -1,5 +1,5 @@
 import * as i18n from 'i18next';
-import resources from './locales/index.js';
+import resources from './app/locales/index.js';
 import app from './app/app.js';
 import './styles.scss';
 
