@@ -2,16 +2,16 @@ import onChange from 'on-change';
 import render from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 
-const setSentState = (usingState, {
+const setSentState = (sentState, {
   posts, feedId, feedTitle, feedDescription,
 }) => {
-  const updatedState = usingState;
+  const updatedSentState = sentState;
 
-  updatedState.posts = posts;
-  updatedState.feed.id = feedId;
-  updatedState.feed.title = feedTitle;
-  updatedState.feed.description = feedDescription;
-  updatedState.state = 'sent';
+  updatedSentState.posts = posts;
+  updatedSentState.feed.id = feedId;
+  updatedSentState.feed.title = feedTitle;
+  updatedSentState.feed.description = feedDescription;
+  updatedSentState.state = 'sent';
 };
 
 const setState = (currentState, state, params) => {
