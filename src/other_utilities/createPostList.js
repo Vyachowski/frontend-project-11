@@ -1,5 +1,5 @@
 import uniqueId from 'lodash.uniqueid';
-import getElementText from './getElementText.js';
+import getElementText from '../element_utilities/getElementText.js';
 
 const createPostList = (elements) => {
   const elementsArray = Array.from(elements);

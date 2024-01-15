@@ -1,5 +1,5 @@
-import setElementText from '../../../utilities/setElementText.js';
-import setElementStyle from '../../../utilities/setElementStyle.js';
+import setElementText from '../../../element_utilities/setElementText.js';
+import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
 const renderError = (params, elements) => {
   const { messageElement, inputElement, buttonElement } = elements;

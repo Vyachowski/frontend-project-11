@@ -1,9 +1,9 @@
-import parseXmlDocument from '../utilities/parseXmlDocument.js';
-import createUrlSchema from '../utilities/createUrlSchema.js';
-import createRssLink from '../utilities/createRssLink.js';
-import getElementText from '../utilities/getElementText.js';
-import createPostList from '../utilities/createPostList.js';
-import fetchRssFeed from '../utilities/fetchRssFeed.js';
+import parseXmlDocument from '../other_utilities/parseXmlDocument.js';
+import createUrlSchema from '../other_utilities/createUrlSchema.js';
+import createRssLink from '../other_utilities/createRssLink.js';
+import getElementText from '../element_utilities/getElementText.js';
+import createPostList from '../other_utilities/createPostList.js';
+import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
 import { setState, watchedState } from './appModel.js';
 
 const inputController = (e, i18next) => {
