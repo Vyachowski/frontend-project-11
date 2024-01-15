@@ -1,5 +1,6 @@
 import onChange from 'on-change';
 import render from './render/index.js';
+import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 
 const createWatchedState = (i18next) => {
   const initialState = {
@@ -7,31 +8,24 @@ const createWatchedState = (i18next) => {
     posts: [], // [{ id, feedId, title, description, link }]
     rssUrl: null,
     state: null,
-    rssForm: {
-      url: null,
-    },
     errors: null,
     translation: i18next.t('interfaceText', { returnObjects: true }),
   };
 
   const watchedState = onChange(initialState, (path, value) => {
-    const { errors, feed, posts } = watchedState;
-    const data = { errors, feed, posts };
-
     if (path === 'state') {
-      render(value, data);
+      render(value, watchedState);
     }
-
-    if (path === 'errors' && errors !== '') {
-      render('error', data);
+    if (path === 'errors') {
+      renderErrorMessage(value, value);
     }
   });
 
   const setState = (state, params = {}) => {
     const states = {
-      error: ({ errorText }) => {
+      error: (errorText) => {
         watchedState.errors = errorText;
-        watchedState.state = 'error';
+        watchedState.state = 'errors';
       },
       filling: ({ url }) => {
         watchedState.rssUrl = url;
@@ -51,6 +45,10 @@ const createWatchedState = (i18next) => {
         watchedState.feed.description = feedDescription;
         watchedState.state = 'sent';
       },
+      rejected: (errorText) => {
+        watchedState.errors = errorText;
+        watchedState.state = 'rejected';
+      }
     };
     return states[state](params);
   };

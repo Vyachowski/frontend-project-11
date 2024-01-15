@@ -1,4 +1,4 @@
-const renderSending = (params, elements) => {
+const renderSending = (elements) => {
   const { buttonElement } = elements;
   buttonElement.disabled = true;
 };

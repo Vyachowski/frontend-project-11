@@ -1,22 +1,24 @@
 import axios from 'axios';
 import isXMLDocument from './isXMLDocument.js';
 
-const fetchRssFeed = (rssLink, i18next) => axios
+const fetchRssFeed = (rssLink) => axios
   .get(rssLink)
   .then((response) => {
     const xmlData = response.data.contents;
     if (!isXMLDocument(xmlData)) {
-      throw new Error(i18next.t('rssForm.xmlError'));
+      throw new Error('xmlError');
     }
     return xmlData;
   })
   .catch((error) => {
-    if (error.response) {
-      throw new Error(`${i18next.t('rssForm.error')}${error.response.status}`);
-    } else if (error.request) {
-      throw new Error(i18next.t('rssForm.networkError'));
-    } else {
-      throw new Error(`${i18next.t('rssForm.error')}${error.message}`);
+    if (error.message === 'xmlError') {
+      throw error;
+    }
+    if (error.request) {
+      throw new Error('networkError');
+    }
+    else {
+      throw new Error('error');
     }
   });
 

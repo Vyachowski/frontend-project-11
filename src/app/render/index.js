@@ -1,7 +1,8 @@
-import renderError from './renderers/renderError.js';
+import renderErrors from './renderers/renderErrors.js';
 import renderFilling from './renderers/renderFilling.js';
 import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
+import renderRejected from "./renderers/renderRejected.js";
 
 const render = (state, params) => {
   const elements = {
@@ -12,13 +13,14 @@ const render = (state, params) => {
   };
 
   const mapping = {
-    error: renderError,
+    errors: renderErrors,
     filling: renderFilling,
     sending: renderSending,
     sent: renderSent,
+    rejected: renderRejected,
   };
 
-  mapping[state](params, elements);
+  mapping[state](elements, params);
 };
 
 export default render;
