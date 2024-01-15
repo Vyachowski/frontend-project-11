@@ -38,6 +38,7 @@ const setState = (state, params = {}) => {
     },
     sending: () => {
       watchedState.state = 'sending';
+      return watchedState.rssUrl;
     },
     sent: ({ posts, feedTitle, feedDescription }) => {
       watchedState.posts = posts;
@@ -46,8 +47,7 @@ const setState = (state, params = {}) => {
       watchedState.state = 'sent';
     },
   };
-
-  states[state](params);
+  return states[state](params);
 };
 
 export {

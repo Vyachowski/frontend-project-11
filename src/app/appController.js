@@ -24,9 +24,9 @@ const inputController = (e, i18next) => {
 
 const formController = (e, i18next) => {
   e.preventDefault();
-  setState('sending');
-  const rssFeedLink = watchedState.rssUrl;
-  const { href: rssLink } = createRssLink(rssFeedLink);
+  const feedLink = setState('sending');
+  const { href: rssLink } = createRssLink(feedLink);
+
   fetchRssFeed(rssLink, i18next)
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
