@@ -1,6 +1,7 @@
 import onChange from 'on-change';
 import render from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
+import { renderFeeds, renderPosts } from './render/renderers/renderFeed.js';
 
 const setSentState = (sentState, {
   posts, feed,
@@ -56,12 +57,18 @@ const createWatchedState = (i18next) => {
     translation: i18next.t('interfaceText', { returnObjects: true }),
   };
 
-  const watchedState = onChange(initialState, (path, value) => {
+  const watchedState = onChange(initialState, (path, value, previousValue) => {
     if (path === 'rssFormProcessing.state') {
       render(value, watchedState);
     }
     if (path === 'rssFormProcessing.errors') {
       renderErrorMessage(value);
+    }
+    if (path === 'posts') {
+      renderPosts(watchedState, value, previousValue);
+    }
+    if (path === 'feeds') {
+      renderFeeds(watchedState, value, previousValue);
     }
   });
 
