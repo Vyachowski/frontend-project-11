@@ -2,7 +2,7 @@ import uniqueId from 'lodash.uniqueid';
 import parseXmlDocument from '../other_utilities/parseXmlDocument.js';
 import createUrlSchema from '../other_utilities/createUrlSchema.js';
 import getElementText from '../element_utilities/getElementText.js';
-import createPostsListFromElements from '../other_utilities/createPostsListFromElements.js';
+import getPostsFromElements from '../other_utilities/getPostsFromElements.js';
 import createRssLink from '../other_utilities/createRssLink.js';
 import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
 
@@ -34,10 +34,12 @@ const formController = (e, watchedState, setState) => {
       const itemElements = rssDocument.querySelectorAll('item');
       const feedId = uniqueId('feed_');
       const params = {
-        feedId,
-        feedTitle: getElementText('title', rssDocument),
-        feedDescription: getElementText('description', rssDocument),
-        posts: createPostsListFromElements(itemElements, feedId),
+        feed: {
+          feedId,
+          feedTitle: getElementText('title', rssDocument),
+          feedDescription: getElementText('description', rssDocument),
+        },
+        posts: getPostsFromElements(itemElements, feedId),
       };
       setState(watchedState, 'sent', params);
     })
