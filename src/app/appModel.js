@@ -15,26 +15,26 @@ const setSentState = (sentState, {
 };
 
 const setState = (currentState, state, params) => {
-  const newState = currentState;
+  const updatedState = currentState;
 
   const states = {
     error: (errorText) => {
-      newState.errors = errorText;
-      newState.state = 'errors';
+      updatedState.errors = errorText;
+      updatedState.state = 'errors';
     },
     filling: ({ url }) => {
-      newState.rssUrl = url;
-      newState.errors = '';
-      newState.state = 'filling';
+      updatedState.rssUrl = url;
+      updatedState.errors = '';
+      updatedState.state = 'filling';
     },
     sending: () => {
-      newState.state = 'sending';
-      return newState.rssUrl;
+      updatedState.state = 'sending';
+      return updatedState.rssUrl;
     },
-    sent: (sentOptions) => setSentState(newState, sentOptions),
+    sent: (sentOptions) => setSentState(updatedState, sentOptions),
     rejected: (errorText) => {
-      newState.errors = errorText;
-      newState.state = 'rejected';
+      updatedState.errors = errorText;
+      updatedState.state = 'rejected';
     },
   };
   return states[state](params);
