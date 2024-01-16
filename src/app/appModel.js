@@ -41,25 +41,27 @@ const setState = (currentState, stateName, params) => {
   return states[stateName](params);
 };
 
+const initialStateTemplate = {
+  rssFormProcessing: {
+    state: null,
+    errors: null,
+    rssUrl: null,
+  },
+  uiState: {
+    isInterfaceRendered: null,
+    viewedPosts: [],
+  },
+  feeds: [], // { id, title, description}
+  posts: [], // [{ id, feedId, title, description, link }]
+  translation: null,
+};
+
 const createWatchedState = (i18next) => {
-  const initialState = {
-    rssFormProcessing: {
-      state: null,
-      errors: null,
-      rssUrl: null,
-    },
-    uiState: {
-      isInterfaceRendered: null,
-      viewedPosts: [],
-    },
-    feeds: [], // { id, title, description}
-    posts: [], // [{ id, feedId, title, description, link }]
-    translation: i18next.t('interfaceText', { returnObjects: true }),
-  };
+  const initialState = { ...initialStateTemplate, translation: i18next.t('interfaceText', { returnObjects: true }) };
 
   const watchedState = onChange(initialState, (path, value, previousValue) => {
     if (path === 'rssFormProcessing.state') {
-      render(value, watchedState);
+      render(watchedState, value);
     }
     if (path === 'rssFormProcessing.errors') {
       renderErrorMessage(value);

@@ -4,7 +4,7 @@ import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
 import renderRejected from './renderers/renderRejected.js';
 
-const render = (stateName, state) => {
+const render = (state, stateName) => {
   const elements = {
     messageElement: document.querySelector('.feedback'),
     formElement: document.querySelector('.rss-form'),
