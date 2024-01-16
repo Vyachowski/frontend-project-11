@@ -9,41 +9,53 @@ const createSectionHeader = (tagText) => {
 
   return header;
 };
-const renderPosts = (posts, { title: postSectionTitle, button: postButtonText }) => {
-  const listGroup = document.querySelector('.list-group');
+
+const renderPostsTitle = (postSectionTitle) => {
   const postCardBody = document.querySelector('.posts-card-body');
-
   const postsHeader = createSectionHeader(postSectionTitle);
-  const feedList = createPostsListElement(posts, postButtonText);
-
-  feedList.forEach((item) => listGroup.appendChild(item));
   postCardBody.appendChild(postsHeader);
 };
 
-const renderFeeds = ({ title, description }, feedSectionTitle) => {
+const renderFeedsTitle = (feedSectionTitle) => {
+  const feedCardBody = document.querySelector('.feeds-card-body');
+  const feedHeader = createSectionHeader(feedSectionTitle);
+  feedCardBody.appendChild(feedHeader);
+};
+
+const renderPosts = (posts, postButtonText) => {
+  const listGroup = document.querySelector('.list-group');
+  const postsList = createPostsListElement(posts, postButtonText);
+  postsList.forEach((item) => listGroup.prepend(item));
+};
+
+const renderFeeds = ({ title, description }) => {
   const feedTitle = document.querySelector('.feed-title');
   const feedDescription = document.querySelector('.feed-description');
-  const feedCardBody = document.querySelector('.feeds-card-body');
 
   setElementText(feedTitle, title);
   setElementText(feedDescription, description);
-
-  const feedHeader = createSectionHeader(feedSectionTitle);
-  feedCardBody.appendChild(feedHeader);
 };
 
 const renderSent = (elements, watchedState) => {
   const { messageElement, inputElement } = elements;
   const { posts, feed, translation } = watchedState;
   const feedTitleText = translation.feed.title;
-  const postTexts = translation.post;
+  const { title, button: buttonText } = translation.post;
+  const updatedState = watchedState;
 
   setElementStyle(messageElement, 'success');
   setElementText(messageElement, translation.rssForm.downloadMessage);
   setElementText(inputElement, '');
 
-  renderPosts(posts, postTexts);
-  renderFeeds(feed, feedTitleText);
+  if (!watchedState.isInterfaceRendered) {
+    renderPostsTitle(title);
+    renderFeedsTitle(feedTitleText);
+  }
+
+  renderPosts(posts, buttonText);
+  renderFeeds(feed);
+
+  updatedState.isInterfaceRendered = true;
 };
 
 export default renderSent;

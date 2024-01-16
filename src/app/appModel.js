@@ -11,7 +11,6 @@ const setSentState = (sentState, {
   updatedSentState.feed.id = feedId;
   updatedSentState.feed.title = feedTitle;
   updatedSentState.feed.description = feedDescription;
-  updatedSentState.isInterfaceRendered = true;
   updatedSentState.rssFormProcessing.state = 'sent';
 };
 
@@ -59,7 +58,7 @@ const createWatchedState = (i18next) => {
       render(value, watchedState);
     }
     if (path === 'rssFormProcessing.errors') {
-      renderErrorMessage(value, value);
+      renderErrorMessage(value);
     }
   });
 
