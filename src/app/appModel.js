@@ -3,14 +3,14 @@ import render from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 
 const setSentState = (sentState, {
-  posts, feedId, feedTitle, feedDescription,
+  posts, feed,
 }) => {
   const updatedSentState = sentState;
+  const previousPosts = updatedSentState.posts;
+  const previousFeeds = updatedSentState.feeds;
 
-  updatedSentState.posts = posts;
-  updatedSentState.feed.id = feedId;
-  updatedSentState.feed.title = feedTitle;
-  updatedSentState.feed.description = feedDescription;
+  updatedSentState.posts = [...posts, ...previousPosts];
+  updatedSentState.feeds = [{ ...feed }, ...previousFeeds];
   updatedSentState.rssFormProcessing.state = 'sent';
 };
 
@@ -47,9 +47,12 @@ const createWatchedState = (i18next) => {
       errors: null,
       rssUrl: null,
     },
-    feed: {}, // { id, title, description}
+    uiState: {
+      isInterfaceRendered: null,
+      viewedPosts: [],
+    },
+    feeds: [], // { id, title, description}
     posts: [], // [{ id, feedId, title, description, link }]
-    isInterfaceRendered: null,
     translation: i18next.t('interfaceText', { returnObjects: true }),
   };
 

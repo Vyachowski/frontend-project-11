@@ -1,7 +1,7 @@
 import uniqueId from 'lodash.uniqueid';
 import getElementText from '../element_utilities/getElementText.js';
 
-const createPostsListFromElements = (elements, feedId) => {
+const getPostsFromElements = (elements, feedId) => {
   const elementsArray = Array.from(elements);
 
   return elementsArray.map((item) => {
@@ -15,4 +15,4 @@ const createPostsListFromElements = (elements, feedId) => {
   });
 };
 
-export default createPostsListFromElements;
+export default getPostsFromElements;
