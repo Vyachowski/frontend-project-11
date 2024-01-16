@@ -1,5 +1,4 @@
-const parseXmlDocument = (content) => new window
-  .DOMParser()
+const parseXmlDocument = (content) => new DOMParser()
   .parseFromString(content, 'text/xml');
 
 export default parseXmlDocument;
