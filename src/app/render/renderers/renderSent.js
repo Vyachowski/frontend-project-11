@@ -10,15 +10,13 @@ const createSectionHeader = (tagText) => {
   return header;
 };
 
-const renderPostsTitle = (postSectionTitle) => {
+const renderSectionsTitles = (postSectionTitle, feedSectionTitle) => {
   const postCardBody = document.querySelector('.posts-card-body');
-  const postsHeader = createSectionHeader(postSectionTitle);
-  postCardBody.appendChild(postsHeader);
-};
-
-const renderFeedsTitle = (feedSectionTitle) => {
   const feedCardBody = document.querySelector('.feeds-card-body');
+  const postsHeader = createSectionHeader(postSectionTitle);
   const feedHeader = createSectionHeader(feedSectionTitle);
+
+  postCardBody.appendChild(postsHeader);
   feedCardBody.appendChild(feedHeader);
 };
 
@@ -48,8 +46,7 @@ const renderSent = (elements, watchedState) => {
   setElementText(inputElement, '');
 
   if (!watchedState.isInterfaceRendered) {
-    renderPostsTitle(title);
-    renderFeedsTitle(feedTitleText);
+    renderSectionsTitles(title, feedTitleText);
   }
 
   renderPosts(posts, buttonText);
