@@ -16,7 +16,9 @@ const inputController = (e, watchedState, setState) => {
       setState(watchedState, 'filling', params);
     })
     .catch(({ message }) => {
-      const params = watchedState.translation.errors[message];
+      const params = message
+        ? watchedState.translation.errors[message]
+        : watchedState.translation.errors.error;
       setState(watchedState, 'error', params);
     });
 };
@@ -40,7 +42,9 @@ const formController = (e, watchedState, setState) => {
       setState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
-      const params = watchedState.translation.errors[message];
+      const params = message
+        ? watchedState.translation.errors[message]
+        : watchedState.translation.errors.error;
       setState(watchedState, 'rejected', params);
     });
 };
