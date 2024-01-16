@@ -1,9 +1,9 @@
 import setElementText from '../../../element_utilities/setElementText.js';
 import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
-const renderErrors = (elements, params) => {
+const renderErrors = (elements, state) => {
   const { messageElement, inputElement, buttonElement } = elements;
-  const { errors } = params;
+  const { errors } = state.rssFormProcessing;
 
   setElementText(messageElement, errors);
   setElementStyle(messageElement, 'danger');

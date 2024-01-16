@@ -4,7 +4,7 @@ import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
 import renderRejected from './renderers/renderRejected.js';
 
-const render = (state, params) => {
+const render = (stateName, state) => {
   const elements = {
     messageElement: document.querySelector('.feedback'),
     formElement: document.querySelector('.rss-form'),
@@ -20,7 +20,7 @@ const render = (state, params) => {
     rejected: renderRejected,
   };
 
-  mapping[state](elements, params);
+  mapping[stateName](elements, state);
 };
 
 export default render;

@@ -11,50 +11,54 @@ const setSentState = (sentState, {
   updatedSentState.feed.id = feedId;
   updatedSentState.feed.title = feedTitle;
   updatedSentState.feed.description = feedDescription;
-  updatedSentState.state = 'sent';
+  updatedSentState.isInterfaceRendered = true;
+  updatedSentState.rssFormProcessing.state = 'sent';
 };
 
-const setState = (currentState, state, params) => {
+const setState = (currentState, stateName, params) => {
   const updatedState = currentState;
 
   const states = {
     error: (errorText) => {
-      updatedState.errors = errorText;
-      updatedState.state = 'errors';
+      updatedState.rssFormProcessing.errors = errorText;
+      updatedState.rssFormProcessing.state = 'errors';
     },
     filling: ({ url }) => {
-      updatedState.rssUrl = url;
-      updatedState.errors = '';
-      updatedState.state = 'filling';
+      updatedState.rssFormProcessing.rssUrl = url;
+      updatedState.rssFormProcessing.errors = '';
+      updatedState.rssFormProcessing.state = 'filling';
     },
     sending: () => {
       updatedState.state = 'sending';
-      return updatedState.rssUrl;
+      return updatedState.rssFormProcessing.rssUrl;
     },
     sent: (sentOptions) => setSentState(updatedState, sentOptions),
     rejected: (errorText) => {
-      updatedState.errors = errorText;
-      updatedState.state = 'rejected';
+      updatedState.rssFormProcessing.errors = errorText;
+      updatedState.rssFormProcessing.state = 'rejected';
     },
   };
-  return states[state](params);
+  return states[stateName](params);
 };
 
 const createWatchedState = (i18next) => {
   const initialState = {
+    rssFormProcessing: {
+      state: null,
+      errors: null,
+      rssUrl: null,
+    },
     feed: {}, // { id, title, description}
     posts: [], // [{ id, feedId, title, description, link }]
-    rssUrl: null,
-    state: null,
-    errors: null,
+    isInterfaceRendered: null,
     translation: i18next.t('interfaceText', { returnObjects: true }),
   };
 
   const watchedState = onChange(initialState, (path, value) => {
-    if (path === 'state') {
+    if (path === 'rssFormProcessing.state') {
       render(value, watchedState);
     }
-    if (path === 'errors') {
+    if (path === 'rssFormProcessing.errors') {
       renderErrorMessage(value, value);
     }
   });
