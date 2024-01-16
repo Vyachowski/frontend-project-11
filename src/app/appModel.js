@@ -60,17 +60,18 @@ const createWatchedState = (i18next) => {
   const initialState = { ...initialStateTemplate, translation: i18next.t('interfaceText', { returnObjects: true }) };
 
   const watchedState = onChange(initialState, (path, value, previousValue) => {
-    if (path === 'rssFormProcessing.state') {
-      render(watchedState, value);
-    }
-    if (path === 'rssFormProcessing.errors') {
-      renderErrorMessage(value);
-    }
-    if (path === 'posts') {
-      renderPosts(watchedState, value, previousValue);
-    }
-    if (path === 'feeds') {
-      renderFeeds(watchedState, value, previousValue);
+    switch (path) {
+      case 'rssFormProcessing.state':
+        render(watchedState, value);
+        break;
+      case 'posts':
+        renderPosts(watchedState, value, previousValue);
+        break;
+      case 'feeds':
+        renderFeeds(watchedState, value, previousValue);
+        break;
+      default:
+        renderErrorMessage(value);
     }
   });
 
