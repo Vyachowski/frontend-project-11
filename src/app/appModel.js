@@ -60,6 +60,7 @@ const createWatchedState = (i18next) => {
   const initialState = { ...initialStateTemplate, translation: i18next.t('interfaceText', { returnObjects: true }) };
 
   const watchedState = onChange(initialState, (path, value, previousValue) => {
+
     switch (path) {
       case 'rssFormProcessing.state':
         render(watchedState, value);
@@ -70,8 +71,11 @@ const createWatchedState = (i18next) => {
       case 'feeds':
         renderFeeds(watchedState, value, previousValue);
         break;
-      default:
+      case 'rssFormProcessing.errors':
         renderErrorMessage(value);
+        break;
+      default:
+        break;
     }
   });
 
