@@ -9,9 +9,9 @@ const setSentState = (sentState, {
   const previousPosts = updatedSentState.posts;
   const previousFeeds = updatedSentState.feeds;
 
+  updatedSentState.rssFormProcessing.state = 'sent';
   updatedSentState.posts = [...posts, ...previousPosts];
   updatedSentState.feeds = [{ ...feed }, ...previousFeeds];
-  updatedSentState.rssFormProcessing.state = 'sent';
 };
 
 const setState = (currentState, stateName, params) => {
@@ -28,7 +28,7 @@ const setState = (currentState, stateName, params) => {
       updatedState.rssFormProcessing.state = 'filling';
     },
     sending: () => {
-      updatedState.state = 'sending';
+      updatedState.rssFormProcessing.state = 'sending';
       return updatedState.rssFormProcessing.rssUrl;
     },
     sent: (sentOptions) => setSentState(updatedState, sentOptions),
