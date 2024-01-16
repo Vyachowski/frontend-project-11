@@ -17,7 +17,7 @@ export default {
         title: 'Feeds',
       },
       errors: {
-        error: 'Something went wrong. Please try again.',
+        defaultError: 'Something went wrong. Please try again.',
         networkError: 'No response from the server. Check network connection.',
         urlInvalid: 'Invalid URL format',
         urlRequired: 'Url should be not empty',

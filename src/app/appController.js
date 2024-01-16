@@ -18,7 +18,7 @@ const inputController = (e, watchedState, setState) => {
     .catch(({ message }) => {
       const params = message
         ? watchedState.translation.errors[message]
-        : watchedState.translation.errors.error;
+        : watchedState.translation.errors.defaultError;
       setState(watchedState, 'error', params);
     });
 };
@@ -44,7 +44,7 @@ const formController = (e, watchedState, setState) => {
     .catch(({ message }) => {
       const params = message
         ? watchedState.translation.errors[message]
-        : watchedState.translation.errors.error;
+        : watchedState.translation.errors.defaultError;
       setState(watchedState, 'rejected', params);
     });
 };
