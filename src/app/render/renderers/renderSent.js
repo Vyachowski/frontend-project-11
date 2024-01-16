@@ -37,7 +37,6 @@ const renderSent = (elements, watchedState) => {
   const { posts, feed, translation } = watchedState;
   const feedTitleText = translation.feed.title;
   const postTexts = translation.post;
-  console.log(postTexts);
 
   setElementStyle(messageElement, 'success');
   setElementText(messageElement, translation.rssForm.downloadMessage);
