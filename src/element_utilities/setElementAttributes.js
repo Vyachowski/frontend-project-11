@@ -1,4 +1,4 @@
-const setAttributesToElement = (element, attributes = {}) => {
+const setElementAttributes = (element, attributes = {}) => {
   const attributeEntries = Object.entries(attributes);
   attributeEntries.forEach(([key, value]) => {
     element.setAttribute(key, value);
@@ -6,4 +6,4 @@ const setAttributesToElement = (element, attributes = {}) => {
   return element;
 };
 
-export default setAttributesToElement;
+export default setElementAttributes;
