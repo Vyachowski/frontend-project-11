@@ -1,20 +1,22 @@
 import renderListElement from './renderListElement.js';
 
-const renderPosts = (watchedState) => {
-  const { posts, translation } = watchedState;
+const renderPosts = ({ posts, translation }, newPostsList, postsList) => {
   const { button: postButtonText } = translation.post;
   const postsListGroupElement = document.querySelector('.list-group-posts');
-  const postsList = renderListElement('posts', posts, postButtonText);
+  const newPostsNumbers = newPostsList.length - postsList.length;
+  const newPosts = newPostsList.slice(0, newPostsNumbers);
+  const renderedPostsList = renderListElement('posts', newPosts, postButtonText);
 
-  postsList.forEach((item) => postsListGroupElement.prepend(item));
+  renderedPostsList.forEach((item) => postsListGroupElement.prepend(item));
 };
 
-const renderFeeds = (watchedState) => {
-  const { feeds } = watchedState;
+const renderFeeds = ({ feeds }, newFeedsList, feedList) => {
   const feedsListGroupElement = document.querySelector('.list-group-feeds');
-  const feedsList = renderListElement('feeds', feeds);
+  const newFeedsNumber = newFeedsList.length - feedList.length;
+  const newFeeds = newFeedsList.slice(0, newFeedsNumber);
+  const renderedNewFeeds = renderListElement('feeds', newFeeds);
 
-  feedsList.forEach((item) => feedsListGroupElement.prepend(item));
+  renderedNewFeeds.forEach((item) => feedsListGroupElement.prepend(item));
 };
 
 export { renderPosts, renderFeeds };
