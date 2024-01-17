@@ -22,6 +22,7 @@ export default {
         urlInvalid: 'Invalid URL format',
         urlRequired: 'Url should be not empty',
         xmlError: 'URL doesn\'t contain a valid RSS',
+        rssExist: 'URL already exists',
       },
     },
   },

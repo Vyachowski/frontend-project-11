@@ -22,6 +22,7 @@ export default {
         urlInvalid: 'Ссылка должна быть валидным URL',
         urlRequired: 'URL не должен быть пустым',
         xmlError: 'Ресурс не содержит валидный RSS',
+        rssExist: 'RSS уже существует',
       },
     },
   },
