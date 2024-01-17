@@ -1,5 +1,5 @@
 import onChange from 'on-change';
-import render from './render/index.js';
+import renderFormState from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 import { renderFeeds, renderPosts } from './render/renderers/renderFeed.js';
 
@@ -62,7 +62,7 @@ const createWatchedState = (i18next) => {
   const watchedState = onChange(initialState, (path, value, previousValue) => {
     switch (path) {
       case 'rssFormProcessing.state':
-        render(watchedState, value);
+        renderFormState(watchedState, value);
         break;
       case 'posts':
         renderPosts(watchedState, value, previousValue);
