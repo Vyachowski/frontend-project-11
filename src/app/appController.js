@@ -23,12 +23,24 @@ const inputController = (e, watchedState, setState) => {
     });
 };
 
+const getFeedAndPostsFromRssDocument = (rssXmlDOM) => {
+  const itemElements = rssXmlDOM.querySelectorAll('item');
+  const feedId = uniqueId('feed_');
+  return {
+    feed: {
+      feedId,
+      feedTitle: getElementText('title', rssXmlDOM),
+      feedDescription: getElementText('description', rssXmlDOM),
+    },
+    posts: getPostsFromElements(itemElements, feedId),
+  };
+};
+
 const formController = (e, watchedState, setState) => {
   e.preventDefault();
   const feedLink = watchedState.rssFormProcessing.rssUrl;
   const rssExistErrorMessage = watchedState.translation.errors.rssExist;
   const { href: rssLink } = createRssLink(feedLink);
-
   setState(watchedState, 'sending');
 
   if (watchedState.rssUrls.includes(feedLink)) {
@@ -39,17 +51,8 @@ const formController = (e, watchedState, setState) => {
   fetchRssFeed(rssLink)
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
-      const itemElements = rssDocument.querySelectorAll('item');
-      const feedId = uniqueId('feed_');
-      const params = {
-        feed: {
-          feedId,
-          feedTitle: getElementText('title', rssDocument),
-          feedDescription: getElementText('description', rssDocument),
-        },
-        posts: getPostsFromElements(itemElements, feedId),
-        feedUrl: feedLink,
-      };
+      const params = getFeedAndPostsFromRssDocument(rssDocument, feedLink);
+      params.feedUrl = feedLink;
       setState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
