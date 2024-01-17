@@ -6,40 +6,38 @@ import { renderFeeds, renderPosts } from './render/renderers/renderFeed.js';
 const setSentState = (sentState, {
   posts, feed, feedUrl,
 }) => {
-  const updatedSentState = sentState;
-  const previousPosts = updatedSentState.posts;
-  const previousFeeds = updatedSentState.feeds;
+  const previousPosts = sentState.posts;
+  const previousFeeds = sentState.feeds;
 
-  updatedSentState.rssUrls.push(feedUrl);
-  updatedSentState.rssFormProcessing.rssUrl = '';
-  updatedSentState.rssFormProcessing.state = 'sent';
-  updatedSentState.posts = [...posts, ...previousPosts];
-  updatedSentState.feeds = [{ ...feed }, ...previousFeeds];
+  sentState.rssUrls.push(feedUrl);
+  sentState.rssFormProcessing.rssUrl = '';
+  sentState.rssFormProcessing.state = 'sent';
+  sentState.posts = [...posts, ...previousPosts];
+  sentState.feeds = [{ ...feed }, ...previousFeeds];
 };
 
 const setState = (currentState, stateName, params) => {
-  const updatedState = currentState;
-
   const states = {
     error: (errorText) => {
-      updatedState.rssFormProcessing.errors = errorText;
-      updatedState.rssFormProcessing.state = 'errors';
+      currentState.rssFormProcessing.errors = errorText;
+      currentState.rssFormProcessing.state = 'errors';
     },
     filling: ({ url }) => {
-      updatedState.rssFormProcessing.rssUrl = url;
-      updatedState.rssFormProcessing.errors = '';
-      updatedState.rssFormProcessing.state = 'filling';
+      currentState.rssFormProcessing.rssUrl = url;
+      currentState.rssFormProcessing.errors = '';
+      currentState.rssFormProcessing.state = 'filling';
     },
     sending: () => {
-      updatedState.rssFormProcessing.state = 'sending';
-      return updatedState.rssFormProcessing.rssUrl;
+      currentState.rssFormProcessing.state = 'sending';
+      return currentState.rssFormProcessing.rssUrl;
     },
-    sent: (sentOptions) => setSentState(updatedState, sentOptions),
+    sent: (sentOptions) => setSentState(currentState, sentOptions),
     rejected: (errorText) => {
-      updatedState.rssFormProcessing.errors = errorText;
-      updatedState.rssFormProcessing.state = 'rejected';
+      currentState.rssFormProcessing.errors = errorText;
+      currentState.rssFormProcessing.state = 'rejected';
     },
   };
+
   return states[stateName](params);
 };
 
