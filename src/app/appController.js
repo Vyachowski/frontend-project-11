@@ -25,8 +25,16 @@ const inputController = (e, watchedState, setState) => {
 
 const formController = (e, watchedState, setState) => {
   e.preventDefault();
-  const feedLink = setState(watchedState, 'sending');
+  const feedLink = watchedState.rssFormProcessing.rssUrl;
+  const rssExistErrorMessage = watchedState.translation.errors.rssExist;
   const { href: rssLink } = createRssLink(feedLink);
+
+  setState(watchedState, 'sending');
+
+  if (watchedState.rssUrls.includes(feedLink)) {
+    setState(watchedState, 'rejected', rssExistErrorMessage);
+    return;
+  }
 
   fetchRssFeed(rssLink)
     .then((xmlData) => parseXmlDocument(xmlData))
@@ -40,6 +48,7 @@ const formController = (e, watchedState, setState) => {
           feedDescription: getElementText('description', rssDocument),
         },
         posts: getPostsFromElements(itemElements, feedId),
+        feedUrl: feedLink,
       };
       setState(watchedState, 'sent', params);
     })
