@@ -4,12 +4,14 @@ import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 import { renderFeeds, renderPosts } from './render/renderers/renderFeed.js';
 
 const setSentState = (sentState, {
-  posts, feed,
+  posts, feed, feedUrl,
 }) => {
   const updatedSentState = sentState;
   const previousPosts = updatedSentState.posts;
   const previousFeeds = updatedSentState.feeds;
 
+  updatedSentState.rssUrls.push(feedUrl);
+  updatedSentState.rssFormProcessing.rssUrl = '';
   updatedSentState.rssFormProcessing.state = 'sent';
   updatedSentState.posts = [...posts, ...previousPosts];
   updatedSentState.feeds = [{ ...feed }, ...previousFeeds];
@@ -51,6 +53,7 @@ const initialStateTemplate = {
     isInterfaceRendered: null,
     viewedPosts: [],
   },
+  rssUrls: [],
   feeds: [], // { id, title, description}
   posts: [], // [{ id, feedId, title, description, link }]
   translation: null,
@@ -68,7 +71,7 @@ const createWatchedState = (i18next) => {
         renderPosts(watchedState, value, previousValue);
         break;
       case 'feeds':
-        renderFeeds(watchedState, value, previousValue);
+        renderFeeds(value, previousValue);
         break;
       case 'rssFormProcessing.errors':
         renderErrorMessage(value);
