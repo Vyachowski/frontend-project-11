@@ -11,14 +11,11 @@ const fetchRssFeed = (rssLink) => axios
     return xmlData;
   })
   .catch((error) => {
-    if (error.message === 'xmlError') {
-      throw error;
-    }
-    if (error.request) {
-      throw new Error('networkError');
-    } else {
-      throw new Error('defaultError');
-    }
+    if (error.message === 'xmlError') throw error;
+
+    throw (error.request
+      ? new Error('networkError')
+      : new Error('defaultError'))
   });
 
 export default fetchRssFeed;
