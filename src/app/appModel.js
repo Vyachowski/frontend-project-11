@@ -9,7 +9,7 @@ const setSentState = (sentState, {
   const previousPosts = sentState.posts;
   const previousFeeds = sentState.feeds;
 
-  sentState.rssUrls.push(feedUrl);
+  sentState.feedsUrls.push(feedUrl);
   sentState.rssFormProcessing.rssUrl = '';
   sentState.rssFormProcessing.state = 'sent';
   sentState.posts = [...posts, ...previousPosts];
@@ -51,7 +51,7 @@ const initialStateTemplate = {
     isInterfaceRendered: null,
     viewedPosts: [],
   },
-  rssUrls: [],
+  feedsUrls: [],
   feeds: [], // { id, title, description}
   posts: [], // [{ id, feedId, title, description, link }]
   translation: null,

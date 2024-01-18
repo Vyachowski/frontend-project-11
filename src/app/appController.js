@@ -43,7 +43,7 @@ const formController = (e, watchedState, setState) => {
   const { href: rssLink } = createRssLink(feedLink);
   setState(watchedState, 'sending');
 
-  if (watchedState.rssUrls.includes(feedLink)) {
+  if (watchedState.feedsUrls.includes(feedLink)) {
     setState(watchedState, 'rejected', rssExistErrorMessage);
     return;
   }
