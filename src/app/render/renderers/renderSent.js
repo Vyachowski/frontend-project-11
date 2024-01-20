@@ -17,7 +17,6 @@ const renderSent = (elements, watchedState) => {
   const { translation } = watchedState;
   const { title: feedTitleText } = translation.feed;
   const { title } = translation.post;
-  const updatedState = watchedState;
 
   setElementStyle(messageElement, 'success');
   setElementText(messageElement, translation.rssForm.downloadMessage);
@@ -27,7 +26,7 @@ const renderSent = (elements, watchedState) => {
     renderSectionsTitles(title, feedTitleText);
   }
 
-  updatedState.uiState.isInterfaceRendered = true;
+  watchedState.uiState.isInterfaceRendered = true;
 };
 
 export default renderSent;

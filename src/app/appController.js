@@ -6,6 +6,16 @@ import getPostsFromElements from '../other_utilities/getPostsFromElements.js';
 import createRssLink from '../other_utilities/createRssLink.js';
 import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
 
+const viewButtonController = (e, watchedState) => {
+  const dataIdValue = e.target.getAttribute('data-id');
+  watchedState.uiState.viewedPosts.unshift(dataIdValue);
+};
+
+const closeButtonController = (e, watchedState) => {
+  const dataIdValue = e.target.getAttribute('data-id');
+  watchedState.uiState.viewedPosts.unshift(dataIdValue);
+};
+
 const inputController = (e, watchedState, setState) => {
   const feedLink = { url: e.target.value };
   const urlSchema = createUrlSchema();
@@ -63,4 +73,6 @@ const formController = (e, watchedState, setState) => {
     });
 };
 
-export { inputController, formController };
+export {
+  inputController, formController, viewButtonController, closeButtonController,
+};

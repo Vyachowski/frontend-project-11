@@ -6,6 +6,7 @@ import fetchRssFeed from '../other_utilities/fetchRssFeed.js';
 import parseXmlDocument from '../other_utilities/parseXmlDocument.js';
 import getPostsFromElements from '../other_utilities/getPostsFromElements.js';
 import createRssLink from '../other_utilities/createRssLink.js';
+import renderVisitedPost from './render/renderers/renderVisitedPost.js';
 
 const setSentState = (sentState, {
   posts, feed, feedUrl,
@@ -53,6 +54,7 @@ const initialStateTemplate = {
   },
   uiState: {
     isInterfaceRendered: null,
+    isModalOpen: null,
     viewedPosts: [],
   },
   feedsUrls: [],
@@ -102,13 +104,16 @@ const createWatchedState = (i18next) => {
         renderPosts(watchedState, value, previousValue);
         break;
       case 'feeds':
-        renderFeeds(value, previousValue);
+        renderFeeds(watchedState, value, previousValue);
         break;
       case 'rssFormProcessing.errors':
         renderErrorMessage(value);
         break;
       case 'feedsUrls':
         setRssUpdater(watchedState, value[0]);
+        break;
+      case 'uiState.viewedPosts':
+        renderVisitedPost(value[0]);
         break;
       default:
         break;

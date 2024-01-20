@@ -1,5 +1,6 @@
 import createElement from '../../../element_utilities/createElement.js';
 import setElementAttributes from '../../../element_utilities/setElementAttributes.js';
+import { viewButtonController } from '../../appController.js';
 
 const linkAttributesTemplate = {
   href: null,
@@ -15,7 +16,7 @@ const buttonAttributesTemplate = {
   'data-bs-target': '#modal',
 };
 
-const renderListElement = (type, data, buttonName = '') => {
+const renderListElement = (state, type, data, buttonName = '') => {
   if (type === 'posts') {
     return data.map(({ id: postUniqueId, title, link: href }) => {
       const itemElement = createElement('li', ['list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0']);
@@ -28,6 +29,7 @@ const renderListElement = (type, data, buttonName = '') => {
       setElementAttributes(buttonElement, buttonElementAttributes);
       itemElement.appendChild(linkElement);
       itemElement.appendChild(buttonElement);
+      buttonElement.addEventListener('click', (e) => viewButtonController(e, state));
 
       return itemElement;
     });
