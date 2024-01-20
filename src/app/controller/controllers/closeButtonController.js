@@ -1,6 +1,5 @@
 const closeButtonController = (e, watchedState) => {
-  const dataIdValue = e.target.getAttribute('data-id');
-  watchedState.uiState.viewedPosts.unshift(dataIdValue);
+  console.log(e, watchedState);
 };
 
 export default closeButtonController;

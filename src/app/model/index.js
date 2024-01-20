@@ -60,32 +60,39 @@ const initialStateTemplate = {
   translation: null,
 };
 
+const stateHandler = (watchedState, path, value, previousValue) => {
+  switch (path) {
+    case 'rssFormProcessing.state':
+      renderFormState(watchedState, value);
+      break;
+    case 'posts':
+      renderPosts(watchedState, value, previousValue);
+      break;
+    case 'feeds':
+      renderFeeds(watchedState, value, previousValue);
+      break;
+    case 'rssFormProcessing.errors':
+      renderErrorMessage(value);
+      break;
+    case 'feedsUrls':
+      rssUpdateController(watchedState, value[0]);
+      break;
+    case 'uiState.viewedPosts':
+      renderVisitedPost(value[0]);
+      break;
+    default:
+      break;
+  }
+};
+
 const createWatchedState = (i18next) => {
   const initialState = { ...initialStateTemplate, translation: i18next.t('interfaceText', { returnObjects: true }) };
-  const watchedState = onChange(initialState, (path, value, previousValue) => {
-    switch (path) {
-      case 'rssFormProcessing.state':
-        renderFormState(watchedState, value);
-        break;
-      case 'posts':
-        renderPosts(watchedState, value, previousValue);
-        break;
-      case 'feeds':
-        renderFeeds(watchedState, value, previousValue);
-        break;
-      case 'rssFormProcessing.errors':
-        renderErrorMessage(value);
-        break;
-      case 'feedsUrls':
-        rssUpdateController(watchedState, value[0]);
-        break;
-      case 'uiState.viewedPosts':
-        renderVisitedPost(value[0]);
-        break;
-      default:
-        break;
-    }
-  });
+
+  const watchedState = onChange(
+    initialState,
+    (path, value, previousValue) => stateHandler(watchedState, path, value, previousValue),
+  );
+
   return { watchedState, setFormState };
 };
 
