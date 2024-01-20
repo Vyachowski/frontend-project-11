@@ -17,12 +17,12 @@ const buttonAttributesTemplate = {
 
 const renderListElement = (type, data, buttonName = '') => {
   if (type === 'posts') {
-    return data.map(({ id:postUniqueId, title, link: href }) => {
+    return data.map(({ id: postUniqueId, title, link: href }) => {
       const itemElement = createElement('li', ['list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0']);
       const linkElement = createElement('a', ['fw-bold'], title);
-      const linkAttributes = { linkAttributesTemplate, ...{ href }, ...{ 'data-id': postUniqueId } };
+      const linkAttributes = { ...linkAttributesTemplate, ...{ href }, ...{ 'data-id': postUniqueId } };
       const buttonElement = createElement('button', ['btn', 'btn-outline-primary', 'btn-sm'], buttonName);
-      const buttonElementAttributes = { buttonAttributesTemplate, ...{ 'data-id': postUniqueId } };
+      const buttonElementAttributes = { ...buttonAttributesTemplate, ...{ 'data-id': postUniqueId } };
 
       setElementAttributes(linkElement, linkAttributes);
       setElementAttributes(buttonElement, buttonElementAttributes);
