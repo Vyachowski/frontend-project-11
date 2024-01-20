@@ -74,5 +74,8 @@ const formController = (e, watchedState, setState) => {
 };
 
 export {
-  inputController, formController, viewButtonController, closeButtonController,
+  inputController,
+  formController,
+  viewButtonController,
+  closeButtonController,
 };
