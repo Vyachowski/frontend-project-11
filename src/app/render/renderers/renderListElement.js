@@ -1,6 +1,6 @@
 import createElement from '../../../element_utilities/createElement.js';
 import setElementAttributes from '../../../element_utilities/setElementAttributes.js';
-import { viewButtonController } from '../../appController.js';
+import { viewButtonController } from '../../controller/index.js';
 
 const linkAttributesTemplate = {
   href: null,

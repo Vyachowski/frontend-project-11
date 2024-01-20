@@ -1,5 +1,5 @@
-import { inputController, formController } from './appController.js';
-import createWatchedState from './appModel.js';
+import { inputController, formController } from './controller/index.js';
+import createWatchedState from './model/index.js';
 
 const app = (i18next) => {
   const { watchedState, setState } = createWatchedState(i18next);
