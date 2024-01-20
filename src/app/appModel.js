@@ -1,5 +1,4 @@
 import onChange from 'on-change';
-import isEqual from 'lodash.isequal';
 import renderFormState from './render/index.js';
 import renderErrorMessage from './render/renderers/renderErrorMessage.js';
 import { renderFeeds, renderPosts } from './render/renderers/renderFeed.js';
@@ -57,13 +56,15 @@ const initialStateTemplate = {
     viewedPosts: [],
   },
   feedsUrls: [],
-  feeds: [], // { id, title, description}
-  posts: [], // [{ id, feedId, title, description, link }]
+  feeds: [],
+  posts: [],
   translation: null,
 };
 
-const getUniqueValuesFromArray = (newArray, previousValues) => newArray
-  .filter((newValue) => !previousValues.some((previousValue) => isEqual(previousValue, newValue)));
+const getUniqueValuesFromArray = (newArray, previousArray) => {
+  const idList = previousArray.map((el) => el.id);
+  return newArray.filter(({ id: newPostId }) => !idList.includes(newPostId));
+};
 
 const setRssUpdater = (currentState, link) => {
   const UPDATE_INTERVAL = 5000;
