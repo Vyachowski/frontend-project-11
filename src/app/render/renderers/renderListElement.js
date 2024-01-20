@@ -17,7 +17,7 @@ const buttonAttributesTemplate = {
 
 const renderListElement = (type, data, buttonName = '') => {
   if (type === 'posts') {
-    return data.map(({ postUniqueId, title, href }) => {
+    return data.map(({ postUniqueId, title, link: href }) => {
       const itemElement = createElement('li', ['list-group-item', 'd-flex', 'justify-content-between', 'align-items-start', 'border-0', 'border-end-0']);
       const linkElement = createElement('a', ['fw-bold'], title);
       const linkAttributes = { linkAttributesTemplate, ...{ href }, ...{ 'data-id': postUniqueId } };
