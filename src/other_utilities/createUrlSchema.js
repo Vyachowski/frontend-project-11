@@ -11,9 +11,7 @@ const createUrlSchema = () => {
     },
   });
 
-  return yup.object().shape({
-    url: yup.string().required().url(),
-  });
+  return yup.string().required().url();
 };
 
 export default createUrlSchema;
