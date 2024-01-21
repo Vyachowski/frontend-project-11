@@ -31,7 +31,6 @@ const setFormState = (currentState, stateName, params) => {
     },
     sending: () => {
       currentState.rssFormProcessing.state = 'sending';
-      return currentState.rssFormProcessing.rssUrl;
     },
     sent: (sentOptions) => setSentState(currentState, sentOptions),
     rejected: (errorText) => {
