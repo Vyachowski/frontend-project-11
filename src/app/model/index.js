@@ -86,7 +86,7 @@ const stateHandler = (watchedState, path, value, previousValue) => {
       renderVisitedPost(newVisitedPostId);
       break;
     }
-    case 'uiState.isModalOpen':
+    case 'uiState.activePost':
       renderModalWindow(watchedState, value);
       break;
     default: break;
