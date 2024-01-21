@@ -16,6 +16,10 @@ export default {
       feed: {
         title: 'Feeds',
       },
+      modalWindow: {
+        mainButton: 'Read more',
+        secondaryButton: 'Close',
+      },
       errors: {
         defaultError: 'Something went wrong. Please try again.',
         networkError: 'No response from the server. Check network connection.',

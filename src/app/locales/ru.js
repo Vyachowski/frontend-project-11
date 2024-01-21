@@ -16,6 +16,10 @@ export default {
       feed: {
         title: 'Фиды',
       },
+      modalWindow: {
+        mainButton: 'Читать полностью',
+        secondaryButton: 'Закрыть',
+      },
       errors: {
         defaultError: 'Что-то пошло не так. Попробуйте еще раз.',
         networkError: 'Отсутствует ответ от сервера. Возможно, нет сети.',
