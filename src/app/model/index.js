@@ -78,9 +78,11 @@ const stateHandler = (watchedState, path, value, previousValue) => {
       rssUpdateController(watchedState, newFeed);
       break;
     }
-    case 'uiState.activePost':
-      renderVisitedPost(value);
+    case 'uiState.viewedPosts': {
+      const newVisitedPostId = value[0];
+      renderVisitedPost(newVisitedPostId);
       break;
+    }
     case 'uiState.isModalOpen':
       renderModalWindow(watchedState, value);
       break;
