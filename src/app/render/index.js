@@ -3,6 +3,11 @@ import renderFilling from './renderers/renderFilling.js';
 import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
 import renderRejected from './renderers/renderRejected.js';
+import renderErrorMessage from './renderers/renderErrorMessage.js';
+import { renderFeeds, renderPosts } from './renderers/renderFeed.js';
+import renderListElement from './renderers/renderListElement.js';
+import renderModalWindow from './renderers/renderModalWindow.js';
+import renderVisitedPost from './renderers/renderVisitedPost.js';
 
 const renderFormState = (state, stateName) => {
   const elements = {
@@ -23,4 +28,12 @@ const renderFormState = (state, stateName) => {
   mapping[stateName](elements, state);
 };
 
-export default renderFormState;
+export {
+  renderFormState,
+  renderErrorMessage,
+  renderFeeds,
+  renderPosts,
+  renderListElement,
+  renderModalWindow,
+  renderVisitedPost,
+};

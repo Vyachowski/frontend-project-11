@@ -1,10 +1,13 @@
 import onChange from 'on-change';
 import rssUpdateController from '../controller/controllers/rssUpdateController.js';
-import { renderFeeds, renderPosts } from '../render/renderers/renderFeed.js';
-import renderErrorMessage from '../render/renderers/renderErrorMessage.js';
-import renderVisitedPost from '../render/renderers/renderVisitedPost.js';
-import renderModalWindow from '../render/renderers/renderModalWindow.js';
-import renderFormState from '../render/index.js';
+import {
+  renderErrorMessage,
+  renderFeeds,
+  renderFormState,
+  renderModalWindow,
+  renderPosts,
+  renderVisitedPost,
+} from '../render/index.js';
 
 const initialStateTemplate = {
   rssFormProcessing: {
