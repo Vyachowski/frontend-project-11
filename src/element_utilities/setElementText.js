@@ -1,10 +1,9 @@
 const setElementText = (element, text) => {
-  const newElement = element;
   if (!element.value) {
-    newElement.textContent = text;
+    element.textContent = text;
     return;
   }
-  newElement.value = text;
+  element.value = text;
 };
 
 export default setElementText;
