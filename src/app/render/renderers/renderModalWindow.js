@@ -1,5 +1,5 @@
-import setElementText from "../../../element_utilities/setElementText.js";
-import setElementAttributes from "../../../element_utilities/setElementAttributes.js";
+import setElementText from '../../../element_utilities/setElementText.js';
+import setElementAttributes from '../../../element_utilities/setElementAttributes.js';
 
 const renderModalWindow = (watchedState, value) => {
   if (!value) {
@@ -12,7 +12,7 @@ const renderModalWindow = (watchedState, value) => {
 
   setElementText(modalTitle, title);
   setElementText(modalText, description);
-  setElementAttributes(modalLink, {href: link});
+  setElementAttributes(modalLink, { href: link });
 };
 
 export default renderModalWindow;

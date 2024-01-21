@@ -6,7 +6,7 @@ const viewButtonController = (e, watchedState) => {
   }
 
   const { title, description, link } = watchedState.posts
-    .filter(({id}) => dataIdValue === id)
+    .filter(({ id }) => dataIdValue === id)
     .at(0);
 
   watchedState.uiState.activePost = { title, description, link };
