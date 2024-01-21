@@ -1,22 +1,7 @@
-import uniqueId from 'lodash.uniqueid';
-import getElementText from '../../../element_utilities/getElementText.js';
 import createRssLink from '../../../other_utilities/createRssLink.js';
 import parseXmlDocument from '../../../other_utilities/parseXmlDocument.js';
 import fetchRssFeed from '../../../other_utilities/fetchRssFeed.js';
-import getPostsFromElements from '../../../other_utilities/getPostsFromElements.js';
-
-const getFeedAndPostsFromRssDocument = (rssXmlDOM) => {
-  const itemElements = rssXmlDOM.querySelectorAll('item');
-  const feedId = uniqueId('feed_');
-  return {
-    feed: {
-      feedId,
-      feedTitle: getElementText('title', rssXmlDOM),
-      feedDescription: getElementText('description', rssXmlDOM),
-    },
-    posts: getPostsFromElements(itemElements, feedId),
-  };
-};
+import getFeedAndPostsFromRssDocument from "../../../other_utilities/getFeedAndPostsFromRssDocument.js";
 
 const formController = (e, watchedState, setState) => {
   e.preventDefault();
