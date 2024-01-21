@@ -4,7 +4,7 @@ import parseXmlDocument from '../../../other_utilities/parseXmlDocument.js';
 import getPostsFromElements from '../../../other_utilities/getPostsFromElements.js';
 import getUniqueValuesFromArrayById from '../../../other_utilities/getUniqueValuesFromArrayById.js';
 
-const rssUpdateController = (currentState, link) => {
+const rssUpdateController = (watchedState, link) => {
   const UPDATE_INTERVAL = 5000;
   const linkWithProxy = createRssLink(link);
   const updateData = () => {
@@ -13,9 +13,9 @@ const rssUpdateController = (currentState, link) => {
       .then((rssDocument) => {
         const itemElements = rssDocument.querySelectorAll('item');
         const newPosts = getPostsFromElements(itemElements, 'new');
-        const uniqueNewPosts = getUniqueValuesFromArrayById(newPosts, currentState.posts);
+        const uniqueNewPosts = getUniqueValuesFromArrayById(newPosts, watchedState.posts);
         if (uniqueNewPosts.length > 0) {
-          currentState.posts = [...uniqueNewPosts, ...currentState.posts];
+          watchedState.posts = [...uniqueNewPosts, ...watchedState.posts];
         }
         setTimeout(updateData, UPDATE_INTERVAL);
       })

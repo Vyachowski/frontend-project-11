@@ -3,15 +3,15 @@ import parseXmlDocument from '../../../other_utilities/parseXmlDocument.js';
 import fetchRssFeed from '../../../other_utilities/fetchRssFeed.js';
 import getFeedAndPostsFromRssDocument from '../../../other_utilities/getFeedAndPostsFromRssDocument.js';
 
-const formController = (e, watchedState, setState) => {
+const formController = (e, watchedState, setFormState) => {
   e.preventDefault();
   const feedLink = watchedState.rssFormProcessing.rssUrl;
   const rssExistErrorMessage = watchedState.translation.errors.rssExist;
   const { href: rssLink } = createRssLink(feedLink);
-  setState(watchedState, 'sending');
+  setFormState(watchedState, 'sending');
 
   if (watchedState.feedsUrls.includes(feedLink)) {
-    setState(watchedState, 'rejected', rssExistErrorMessage);
+    setFormState(watchedState, 'rejected', rssExistErrorMessage);
     return;
   }
 
@@ -20,13 +20,13 @@ const formController = (e, watchedState, setState) => {
     .then((rssDocument) => {
       const params = getFeedAndPostsFromRssDocument(rssDocument, feedLink);
       params.feedUrl = feedLink;
-      setState(watchedState, 'sent', params);
+      setFormState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
       const params = message
         ? watchedState.translation.errors[message]
         : watchedState.translation.errors.defaultError;
-      setState(watchedState, 'rejected', params);
+      setFormState(watchedState, 'rejected', params);
     });
 };
 
