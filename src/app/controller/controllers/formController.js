@@ -1,7 +1,7 @@
 import createRssLink from '../../../other_utilities/createRssLink.js';
 import parseXmlDocument from '../../../other_utilities/parseXmlDocument.js';
 import fetchRssFeed from '../../../other_utilities/fetchRssFeed.js';
-import getFeedAndPostsFromRssDocument from "../../../other_utilities/getFeedAndPostsFromRssDocument.js";
+import getFeedAndPostsFromRssDocument from '../../../other_utilities/getFeedAndPostsFromRssDocument.js';
 
 const formController = (e, watchedState, setState) => {
   e.preventDefault();

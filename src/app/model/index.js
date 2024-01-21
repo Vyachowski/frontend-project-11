@@ -1,10 +1,10 @@
 import onChange from 'on-change';
-import renderFormState from '../render/index.js';
-import renderErrorMessage from '../render/renderers/renderErrorMessage.js';
-import { renderFeeds, renderPosts } from '../render/renderers/renderFeed.js';
-import renderVisitedPost from '../render/renderers/renderVisitedPost.js';
 import rssUpdateController from '../controller/controllers/rssUpdateController.js';
-import setFormState from "./state_setters/setFormState.js";
+import { renderFeeds, renderPosts } from '../render/renderers/renderFeed.js';
+import renderErrorMessage from '../render/renderers/renderErrorMessage.js';
+import renderVisitedPost from '../render/renderers/renderVisitedPost.js';
+import renderModalWindow from '../render/renderers/renderModalWindow.js';
+import renderFormState from '../render/index.js';
 
 const initialStateTemplate = {
   rssFormProcessing: {
@@ -13,8 +13,7 @@ const initialStateTemplate = {
     rssUrl: null,
   },
   uiState: {
-    isInterfaceRendered: null,
-    isModalOpen: null,
+    activePost: null,
     viewedPosts: [],
   },
   feedsUrls: [],
@@ -23,10 +22,50 @@ const initialStateTemplate = {
   translation: null,
 };
 
+const setSentState = (sentState, {
+  posts, feed, feedUrl,
+}) => {
+  const previousPosts = sentState.posts;
+  const previousFeeds = sentState.feeds;
+
+  sentState.feedsUrls.unshift(feedUrl);
+  sentState.rssFormProcessing.rssUrl = '';
+  sentState.rssFormProcessing.state = 'sent';
+  sentState.posts = [...posts, ...previousPosts];
+  sentState.feeds = [{ ...feed }, ...previousFeeds];
+};
+
+const setFormState = (currentState, stateName, params) => {
+  const states = {
+    error: (errorText) => {
+      currentState.rssFormProcessing.errors = errorText;
+      currentState.rssFormProcessing.state = 'errors';
+    },
+    filling: ({ url }) => {
+      currentState.rssFormProcessing.rssUrl = url;
+      currentState.rssFormProcessing.errors = '';
+      currentState.rssFormProcessing.state = 'filling';
+    },
+    sending: () => {
+      currentState.rssFormProcessing.state = 'sending';
+    },
+    sent: (sentOptions) => setSentState(currentState, sentOptions),
+    rejected: (errorText) => {
+      currentState.rssFormProcessing.errors = errorText;
+      currentState.rssFormProcessing.state = 'rejected';
+    },
+  };
+
+  return states[stateName](params);
+};
+
 const stateHandler = (watchedState, path, value, previousValue) => {
   switch (path) {
     case 'rssFormProcessing.state':
       renderFormState(watchedState, value);
+      break;
+    case 'rssFormProcessing.errors':
+      renderErrorMessage(value);
       break;
     case 'posts':
       renderPosts(watchedState, value, previousValue);
@@ -34,17 +73,16 @@ const stateHandler = (watchedState, path, value, previousValue) => {
     case 'feeds':
       renderFeeds(watchedState, value, previousValue);
       break;
-    case 'rssFormProcessing.errors':
-      renderErrorMessage(value);
-      break;
     case 'feedsUrls':
       rssUpdateController(watchedState, value[0]);
       break;
     case 'uiState.viewedPosts':
       renderVisitedPost(value[0]);
       break;
-    default:
+    case 'uiState.isModalOpen':
+      renderModalWindow(watchedState, value);
       break;
+    default: break;
   }
 };
 

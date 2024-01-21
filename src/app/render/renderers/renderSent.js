@@ -17,16 +17,13 @@ const renderSent = (elements, watchedState) => {
   const { translation } = watchedState;
   const { title: feedTitleText } = translation.feed;
   const { title } = translation.post;
+  const isHeadersExist = document.querySelectorAll('h2.card-title').length === 2;
 
   setElementStyle(messageElement, 'success');
   setElementText(messageElement, translation.rssForm.downloadMessage);
   setElementText(inputElement, '');
 
-  if (!watchedState.uiState.isInterfaceRendered) {
-    renderSectionsTitles(title, feedTitleText);
-  }
-
-  watchedState.uiState.isInterfaceRendered = true;
+  if (!isHeadersExist) renderSectionsTitles(title, feedTitleText);
 };
 
 export default renderSent;
