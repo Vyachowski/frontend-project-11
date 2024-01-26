@@ -24,25 +24,23 @@ const initialStateTemplate = {
   translation: null,
 };
 
-const setSentState = (sentState, {
-  posts, feed, feedUrl,
-}) => {
-  const previousPosts = sentState.posts;
-  const previousFeeds = sentState.feeds;
-
-  sentState.feedsUrls.unshift(feedUrl);
-  sentState.rssFormProcessing.rssUrl = '';
-  sentState.rssFormProcessing.state = 'sent';
-  sentState.posts = [...posts, ...previousPosts];
-  sentState.feeds = [{ ...feed }, ...previousFeeds];
-};
-
 const setFormState = (currentState, stateName, params) => {
   const states = {
     sending: () => {
       currentState.rssFormProcessing.state = 'sending';
     },
-    sent: (sentOptions) => setSentState(currentState, sentOptions),
+    sent: ({
+      posts, feed, feedUrl,
+    }) => {
+      const previousPosts = currentState.posts;
+      const previousFeeds = currentState.feeds;
+
+      currentState.feedsUrls.unshift(feedUrl);
+      currentState.rssFormProcessing.rssUrl = '';
+      currentState.rssFormProcessing.state = 'sent';
+      currentState.posts = [...posts, ...previousPosts];
+      currentState.feeds = [{ ...feed }, ...previousFeeds];
+    },
     rejected: (errorInfo) => {
       currentState.rssFormProcessing.errors = errorInfo;
       currentState.rssFormProcessing.state = 'rejected';
