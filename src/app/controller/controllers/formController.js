@@ -38,7 +38,7 @@ const formController = (e, watchedState, setFormState) => {
     .then((xmlData) => parseXmlDocument(xmlData))
     .then((rssDocument) => {
       const params = getFeedAndPostsFromRssDocument(rssDocument, feedLink);
-      setFormState(watchedState, 'sent', {...params, feedUrl: feedLink});
+      setFormState(watchedState, 'sent', { ...params, feedUrl: feedLink });
     })
     .catch(({ message }) => {
       errorInfo.errorMessage = message

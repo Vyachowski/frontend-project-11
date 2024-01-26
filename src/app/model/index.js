@@ -39,11 +39,6 @@ const setSentState = (sentState, {
 
 const setFormState = (currentState, stateName, params) => {
   const states = {
-    filling: ({ url }) => {
-      currentState.rssFormProcessing.rssUrl = url;
-      currentState.rssFormProcessing.errors = '';
-      currentState.rssFormProcessing.state = 'filling';
-    },
     sending: () => {
       currentState.rssFormProcessing.state = 'sending';
     },
