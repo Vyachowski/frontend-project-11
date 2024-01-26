@@ -7,7 +7,7 @@ const app = (i18next) => {
   const formElement = document.querySelector('.rss-form');
   const [inputElement] = formElement.elements;
 
-  inputElement.addEventListener('input', (e) => inputController(e, watchedState, setFormState));
+  inputElement.addEventListener('input', (e) => inputController(e, watchedState));
   formElement.addEventListener('submit', (e) => formController(e, watchedState, setFormState));
 };
 
