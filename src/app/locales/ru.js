@@ -22,7 +22,7 @@ export default {
       },
       errors: {
         defaultError: 'Что-то пошло не так. Попробуйте еще раз.',
-        networkError: 'Отсутствует ответ от сервера. Возможно, нет сети.',
+        networkError: 'Ошибка сети',
         urlInvalid: 'Ссылка должна быть валидным URL',
         urlRequired: 'URL не должен быть пустым',
         xmlError: 'Ресурс не содержит валидный RSS',
