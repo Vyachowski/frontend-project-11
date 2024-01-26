@@ -31,7 +31,6 @@ const formController = (e, watchedState, setFormState) => {
       setFormState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
-      console.log(message);
       errorInfo.errorMessage = message
         ? watchedState.translation.errors[message]
         : watchedState.translation.errors.defaultError;
