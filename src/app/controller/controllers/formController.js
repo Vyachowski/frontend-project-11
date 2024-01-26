@@ -21,10 +21,8 @@ const urlSchema = (() => {
 const formController = (e, watchedState, setFormState) => {
   e.preventDefault();
   setFormState(watchedState, 'sending');
-
   const errorInfo = { errorMessage: '', isUrlValid: false };
   const feedLink = watchedState.rssFormProcessing.rssUrl;
-
   if (watchedState.feedsUrls.includes(feedLink)) {
     errorInfo.errorMessage = watchedState.translation.errors.rssExist;
     setFormState(watchedState, 'rejected', errorInfo);
