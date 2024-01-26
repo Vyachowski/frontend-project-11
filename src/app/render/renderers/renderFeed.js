@@ -6,9 +6,9 @@ const renderPosts = (state, newPostsList, postsList) => {
   const newPostsNumber = newPostsList.length - postsList.length;
   if (newPostsNumber) {
     const newPosts = newPostsList.slice(0, newPostsNumber);
-    const viewPostsList = renderListElement(state, 'posts', newPosts, postButtonText);
+    const view = renderListElement(state, 'posts', newPosts, postButtonText);
 
-    viewPostsList.forEach((item) => postsListGroupElement.prepend(item));
+    view.forEach((item) => postsListGroupElement.prepend(item));
   }
 };
 
@@ -17,9 +17,9 @@ const renderFeeds = (state, newFeedsList, feedList) => {
   const newFeedsNumber = newFeedsList.length - feedList.length;
   if (newFeedsNumber) {
     const newFeeds = newFeedsList.slice(0, newFeedsNumber);
-    const viewNewFeeds = renderListElement(state, 'feeds', newFeeds);
+    const view = renderListElement(state, 'feeds', newFeeds);
 
-    viewNewFeeds.forEach((item) => feedsListGroupElement.prepend(item));
+    view.forEach((item) => feedsListGroupElement.prepend(item));
   }
 };
 
