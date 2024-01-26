@@ -1,7 +1,6 @@
 import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
 import renderRejected from './renderers/renderRejected.js';
-import renderErrorMessage from './renderers/renderErrorMessage.js';
 import { renderFeeds, renderPosts } from './renderers/renderFeed.js';
 import renderModalWindow from './renderers/renderModalWindow.js';
 import renderVisitedPost from './renderers/renderVisitedPost.js';
@@ -25,7 +24,6 @@ const renderFormState = (state, stateName) => {
 
 export {
   renderFormState,
-  renderErrorMessage,
   renderFeeds,
   renderPosts,
   renderModalWindow,
