@@ -13,8 +13,9 @@ const renderSectionsTitles = (postSectionTitle, feedSectionTitle) => {
 };
 
 const renderSent = (elements, watchedState) => {
-  const { messageElement, inputElement } = elements;
+  const { messageElement, inputElement, buttonElement } = elements;
   const { translation } = watchedState;
+  buttonElement.disabled = false;
   const { title: feedTitleText } = translation.feed;
   const { title } = translation.post;
   const isHeadersExist = document.querySelectorAll('h2.card-title').length === 2;

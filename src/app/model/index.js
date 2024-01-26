@@ -1,7 +1,6 @@
 import onChange from 'on-change';
 import rssUpdateController from '../controller/controllers/rssUpdateController.js';
 import {
-  renderErrorMessage,
   renderFeeds,
   renderFormState,
   renderModalWindow,
@@ -66,9 +65,6 @@ const stateHandler = (watchedState, path, value, previousValue) => {
   switch (path) {
     case 'rssFormProcessing.state':
       renderFormState(watchedState, value);
-      break;
-    case 'rssFormProcessing.errors':
-      renderErrorMessage(value);
       break;
     case 'posts':
       renderPosts(watchedState, value, previousValue);

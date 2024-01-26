@@ -1,5 +1,5 @@
 import fetchRssFeed from '../../../other_utilities/fetchRssFeed.js';
-import createRssLink from '../../../other_utilities/createRssLink.js';
+import createRssLink from '../../../other_utilities/createRssLinkWithProxy.js';
 import parseXmlDocument from '../../../other_utilities/parseXmlDocument.js';
 import getPostsFromElements from '../../../other_utilities/getPostsFromElements.js';
 import getUniqueValuesFromArrayById from '../../../other_utilities/getUniqueValuesFromArrayById.js';
