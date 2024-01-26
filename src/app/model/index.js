@@ -39,10 +39,6 @@ const setSentState = (sentState, {
 
 const setFormState = (currentState, stateName, params) => {
   const states = {
-    error: (errorText) => {
-      currentState.rssFormProcessing.errors = errorText;
-      currentState.rssFormProcessing.state = 'errors';
-    },
     filling: ({ url }) => {
       currentState.rssFormProcessing.rssUrl = url;
       currentState.rssFormProcessing.errors = '';
@@ -52,8 +48,8 @@ const setFormState = (currentState, stateName, params) => {
       currentState.rssFormProcessing.state = 'sending';
     },
     sent: (sentOptions) => setSentState(currentState, sentOptions),
-    rejected: (errorText) => {
-      currentState.rssFormProcessing.errors = errorText;
+    rejected: (errorInfo) => {
+      currentState.rssFormProcessing.errors = errorInfo;
       currentState.rssFormProcessing.state = 'rejected';
     },
   };

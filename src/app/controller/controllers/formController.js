@@ -8,6 +8,7 @@ const formController = (e, watchedState, setFormState) => {
   e.preventDefault();
   setFormState(watchedState, 'sending');
 
+  const errorInfo = { errorMessage: '', isUrlValid: false };
   const urlSchema = createUrlSchema();
   const feedLink = watchedState.rssFormProcessing.rssUrl;
   const rssExistErrorMessage = watchedState.translation.errors.rssExist;
@@ -20,6 +21,7 @@ const formController = (e, watchedState, setFormState) => {
   urlSchema.validate(feedLink)
     .then((url) => {
       const { href } = createRssLinkWithProxy(url);
+      errorInfo.isUrlValid = true;
       return fetchRssFeed(href);
     })
     .then((xmlData) => parseXmlDocument(xmlData))
@@ -29,10 +31,10 @@ const formController = (e, watchedState, setFormState) => {
       setFormState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
-      const errorMessage = message
+      errorInfo.errorMessage = message
         ? watchedState.translation.errors[message]
         : watchedState.translation.errors.defaultError;
-      setFormState(watchedState, 'rejected', errorMessage);
+      setFormState(watchedState, 'rejected', errorInfo);
     });
 };
 

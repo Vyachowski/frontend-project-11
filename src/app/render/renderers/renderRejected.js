@@ -3,11 +3,11 @@ import setElementStyle from '../../../element_utilities/setElementStyle.js';
 
 const renderRejected = (elements, state) => {
   const { messageElement, inputElement, buttonElement } = elements;
-  const { rssFormProcessing } = state;
+  const { errorMessage, isUrlValid } = state.rssFormProcessing.errors;
   buttonElement.disabled = false;
-  setElementText(messageElement, rssFormProcessing.errors);
+  setElementText(messageElement, errorMessage);
   setElementStyle(messageElement, 'danger');
-  setElementStyle(inputElement, 'invalid');
+  isUrlValid ? setElementStyle(inputElement, 'valid') : setElementStyle(inputElement, 'invalid');
 };
 
 export default renderRejected;
