@@ -14,4 +14,4 @@ A website that fetches information from RSS links and refreshes its content ever
 
 ### Demo
 
-[RSS Reader](https://rss-reader-xi-five.vercel.app/)
+[RSS Reader](https://rss-reader-vyachowski.vercel.app/)
