@@ -1,4 +1,3 @@
-import renderErrors from './renderers/renderErrors.js';
 import renderSending from './renderers/renderSending.js';
 import renderSent from './renderers/renderSent.js';
 import renderRejected from './renderers/renderRejected.js';
@@ -17,7 +16,6 @@ const renderFormState = (state, stateName) => {
   };
 
   const mapping = {
-    errors: renderErrors,
     sending: renderSending,
     sent: renderSent,
     rejected: renderRejected,
