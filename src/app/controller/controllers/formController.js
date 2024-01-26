@@ -11,10 +11,10 @@ const formController = (e, watchedState, setFormState) => {
   const errorInfo = { errorMessage: '', isUrlValid: false };
   const urlSchema = createUrlSchema();
   const feedLink = watchedState.rssFormProcessing.rssUrl;
-  const rssExistErrorMessage = watchedState.translation.errors.rssExist;
 
   if (watchedState.feedsUrls.includes(feedLink)) {
-    setFormState(watchedState, 'rejected', rssExistErrorMessage);
+    errorInfo.errorMessage = watchedState.translation.errors.rssExist;
+    setFormState(watchedState, 'rejected', errorInfo);
     return;
   }
 
@@ -31,6 +31,7 @@ const formController = (e, watchedState, setFormState) => {
       setFormState(watchedState, 'sent', params);
     })
     .catch(({ message }) => {
+      console.log(message);
       errorInfo.errorMessage = message
         ? watchedState.translation.errors[message]
         : watchedState.translation.errors.defaultError;
