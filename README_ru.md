@@ -4,6 +4,8 @@
 
 # Hexlet college JS project  – Сайт для чтения RSS лент
 
+![Cover image for project](https://github.com/Vyachowski/frontend-project-11/blob/main/cover.png)
+
 Проект в рамках обучения на курсе «фронтэнд-разработчик» школы «Хекслет». Закрепляет знания по получению и обработке данных на чистом JS, создании расширяемой архитектуры приложения, управлением состоянием и применением принципа конечных автоматов, а также деплою вместе с настройкой окружения.
 
 To read **Readme in english**  please follow [this link](https://github.com/Vyachowski/frontend-project-11/blob/main/README.md)
