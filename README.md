@@ -4,6 +4,8 @@
 
 # Hexlet College JS Project – RSS Reader
 
+![Cover image for project](https://github.com/Vyachowski/frontend-project-11/blob/main/cover.png)
+
 This project focuses on elements such as retrieving data from a backend, creating a straightforward app structure, managing state and configuring the environment.
 
 Чтобы читать **Readme на русском**  перейдите по [этой ссылке](https://github.com/Vyachowski/frontend-project-11/blob/main/README_ru.md)
