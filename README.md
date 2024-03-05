@@ -14,6 +14,46 @@ This project focuses on elements such as retrieving data from a backend, creatin
 
 A website that fetches information from RSS links and refreshes its content every 5 seconds to display the latest posts.
 
+## Getting Started
+
 ### Demo
 
 [RSS Reader](https://rss-reader-vyachowski.vercel.app/)
+
+### Dependencies
+
+* Node.js
+* NPM Package Manager as a part of Node.js
+
+### Installing
+
+* Clone a GitHub repository via
+
+```sh
+git clone https://github.com/Vyachowski/frontend-project-11.git
+```
+
+or
+
+```sh 
+git clone git@github.com:Vyachowski/frontend-project-11.git
+```
+for ssh
+* Run in a root directory of the project
+  
+```sh 
+npm i
+```
+
+### Executing program
+
+Run a development server from root directory:
+
+```sh 
+make develop
+```
+Or you can create a build to upload to your own server:
+
+```sh
+make build
+```
