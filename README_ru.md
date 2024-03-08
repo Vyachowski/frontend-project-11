@@ -18,7 +18,9 @@ To read **Readme in english**  please follow [this link](https://github.com/Vyac
 
 ### Демо проект
 
-[RSS Reader](https://rss-reader-vyachowski.vercel.app/)
+[Перейти в RSS Reader](https://rss-reader-vyachowski.vercel.app/)
+
+_Note: Render.com может долго запускаться после простоя. Дайте ему шанс._
 
 ### Зависимости
 
