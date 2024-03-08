@@ -18,9 +18,9 @@ A website that fetches information from RSS links and refreshes its content ever
 
 ### Demo
 
-_Note: Render.com may experience a delay in startup after a period of downtime. Please be patient._
+[Visit RSS Reader Demo](https://rss-reader-vyachowski.vercel.app/)
 
-[RSS Reader](https://rss-reader-vyachowski.vercel.app/)
+_Note: Render.com may experience a delay in startup after a period of downtime. Please be patient._
 
 ### Dependencies
 
